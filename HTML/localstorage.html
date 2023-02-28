@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localstorage</title>
+    <script>
+        // 语句 1： 保存数据到本地存储
+        localStorage.setItem("ExpireTime", "1527592757");
+        localStorage.UserId = "2021008";
+        // 语句 2： 根据指定名称获取本地存储中的数据
+        var expireTime = localStorage.getItem("ExpireTime");
+        console.log(expireTime);
+        // 语句 3： 根据指定名称从本地存储中移除
+        localStorage.removeItem("ExpireTime");
+        // 语句 4： 清除本地存储中所有数据
+        localStorage.clear();
+    </script>
+    <script>
+        // 语句 1： 保存数据到本地存储
+        sessionStorage.setItem("ShopId", "SH1290333211");
+        sessionStorage.ShopNumber = "10";
+        // 语句 2： 根据指定名称获取本地存储中的数据
+        var ShopId = sessionStorage.getItem("ShopId");
+        console.log(ShopId);
+        // 语句 3： 根据指定名称从本地存储中移除
+        sessionStorage.removeItem("ShopId");
+        // 语句 4： 清除本地存储中所有数据
+        sessionStorage.clear();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

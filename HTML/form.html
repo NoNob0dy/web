@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+</head>
+
+<body>
+    <form id="form_1" action="form.html" method=get" autocomplete="on">
+        <!--email url datetime-local color-->
+        <input type="search" placeholder="search">
+        <input type="radio" name="显示值" value="提交值">
+        <input type="checkbox" name="#" value="#">
+        <input type="file" name="img" accept="image/jpg, image/png">
+        <select multiple="multiple" size="2">
+            <option selected="selected">op_1</option>
+            <option>op_2</option>
+        </select>
+        <input type="submit" value="submit">
+    </form>
+    <form id="form_2" action="form.html" method=get">
+        <input type="submit" value="submit_2">
+    </form>
+    <input type="number" form="form_2" max="10" min="0" step="2" value="0" name="num">
+
+</body>
+
+</html>
