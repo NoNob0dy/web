@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>蓝桥校园一卡通</title> 
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css" /> 
+  </head> 
+  <body>
+    <div id="app"> 
+		<div class="form">
+			<div class="card" id="cardStyle">
+				<div class="cardName">蓝桥校园一卡通</div>
+				<div class="info"> 
+					<div class="item"></div>
+					<div class="item"></div>
+					<div class="item"></div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="form-group">
+				    <label for="studentName">姓名</label>
+				    <input type="text" class="form-control" id="studentName" placeholder="请输入姓名" aria-describedby="inputSuccess2Status">
+					<span id="vail_name" style="display: none;" class="help-block"> 姓名是2-4个汉字，请您检查输入的内容</span>
+				</div>
+				<div class="form-group">
+				    <label for="studentId">学号</label>
+				    <input type="number" class="form-control" id="studentId" placeholder="请输入学号">
+					<span id="vail_studentId" style="display: none;" class="help-block"> 学号是1-12位的数字，请您检查输入的内容</span>
+				</div>
+				<div class="form-group">
+				    <label for="college">学院</label>
+				    <select id="college" class="form-control">
+				      <option value="软件工程学院">软件工程学院</option>
+				      <option value="信息技术学院">信息技术学院</option>
+				      <option value="数字媒体学院">数字媒体学院</option>
+				      <option value="计算机科学学院">计算机科学学院</option> 
+				    </select>
+				</div> 
+				<button id="submit">制卡</button> 
+			</div>
+		</div>
+    </div> 
+    <script> 
+	    // 获取DOM元素对象
+		const studentName = document.getElementById("studentName"); // 姓名
+		const studentId = document.getElementById("studentId");  // 学号
+		const college = document.getElementById("college"); // 学院
+		const submit = document.getElementById("submit");  // 制卡按钮
+		const cardStyle = document.getElementById("cardStyle"); // 卡片
+		const item = document.querySelectorAll(".item") // 卡片项
+		
+		submit.onclick = () => {
+			// TODO 待补充代码
+			let fp = document.querySelectorAll(".form-group");
+			let success = {name: false, id: false};
+			let name = new RegExp(/^[\u4e00-\u9fa5]{2,4}$/),
+				id = new RegExp(/^[0-9]{1,12}$/);
+			let alertName = document.getElementById("vail_name");
+				alertId = document.getElementById("vail_studentId");
+			if (!name.test(studentName.value)) {
+				alertName.style.display = "";
+				fp[0].classList = "form-group has-error";
+			}
+			else {
+				alertName.style.display = "none";
+				success.name = true;
+				fp[0].classList = "form-group";
+			}
+			if (!id.test(studentId.value)) {
+				alertId.style.display = "";
+				fp[1].classList = "form-group has-error";
+			}
+			else {
+				alertId.style.display = "none";
+				success.id = true;
+				fp[1].classList = "form-group";
+			}
+			// 添加 showCard 类显示放大一卡通的动画，请勿删除
+			if (success.id == true && success.name == true) {
+				let n = document.querySelector(".item:nth-of-type(1)").innerHTML = "姓名：" + studentName.value;
+				    i = document.querySelector(".item:nth-of-type(2)").innerHTML = "学号：" + studentId.value;
+					c = document.querySelector(".item:nth-of-type(3)").innerHTML = "学院：" + college.value;
+				cardStyle.classList.add('showCard'); 
+			}
+		}
+      
+    </script>
+  </body>
+</html>
