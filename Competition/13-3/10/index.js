@@ -19,8 +19,6 @@ app.post('/add', function(req, res) {
     });
 })
 
-//TODO：请补全获取用户列表代码
-
 
 app.listen(8080, function() {
     console.log("访问地址:http://localhost:8080")
