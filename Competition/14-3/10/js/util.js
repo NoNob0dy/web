@@ -6,26 +6,44 @@
  * @return {Array} 分页数组 indexArr
 */
 const createPaginationIndexArr = (currentPage, totalPages, pagerCount) => {
-    currentPage = Array.of(currentPage);
-    let cnt_l, cnt_r, lock = true;
-    let indexArr = new Set([1, totalPages]);
     // TODO：根据传参生成分页数组 indexArr
+    let indexArr = new Set([1, totalPages]);
     if (totalPages <= pagerCount) {
         return Array.from({ length: totalPages }, (v, k) => k + 1);
     }
     else {
-        for (let i = 0; i < currentPage.length; i++) {
-            indexArr.add(currentPage[i]);
-        }
-        cnt_l = currentPage[0];
-        cnt_r = currentPage[currentPage.length - 1];
-        while (indexArr.size < pagerCount) {
-            if (lock && cnt_l > 1) {
-                indexArr.add(cnt_l--);
-            } else if (!lock && cnt_r < totalPages) {
-                indexArr.add(cnt_r++);
+        let cnt;
+            left = 1 + (pagerCount - 3),
+            right = totalPages - (pagerCount - 3);
+        if (currentPage >= right) {
+            cnt = totalPages - 1;
+            while (indexArr.size < pagerCount) {
+                indexArr.add(cnt--);
             }
-            lock = !lock;
+        } else if (currentPage <= left){
+            cnt = 2;
+            while (indexArr.size < pagerCount) {
+                indexArr.add(cnt++);
+            }
+        } else {
+            cnt = 0;
+            while (1) {
+                let l = currentPage - cnt,
+                    r = currentPage + cnt; 
+                if (l >= left - 1) {
+                    indexArr.add(l);
+                    if (indexArr.size == pagerCount) {
+                        break;
+                    }
+                }
+                if (r <= right + 1) {
+                    indexArr.add(r);
+                    if (indexArr.size == pagerCount) {
+                        break;
+                    }
+                }
+                cnt++;
+            }
         }
         return Array.from(indexArr).sort((x, y) => {
             if (x < y) {
