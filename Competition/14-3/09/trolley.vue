@@ -3,16 +3,24 @@
   <div class="container">
     <div class="good-list">
       <div v-for="good in goods" :key="good.name" class="good">
-        <img :src="good.cover" draggable="true"/>
+        <img
+          :src="good.cover"
+          draggable="true"
+          @dragstart="
+            () => {
+              event.dataTransfer.setData('good', good.name);
+            }
+          "
+        />
         <span>{{ good.name }}</span>
         <span>￥{{ good.price }}</span>
       </div>
     </div>
-    <div id="trolley" class="trolley" @drop="addGood()">
+    <div id="trolley" class="trolley" @dragover.prevent @drop="addGood()">
       <span id="bought" class="bought" v-if="bought.length !== 0">{{
         bought.length
       }}</span>
-      <img src="./images/trolley.jpeg"/>
+      <img src="./images/trolley.jpeg" />
     </div>
     <div class="result">
       <div>
@@ -33,7 +41,6 @@
   display: flex;
   flex-direction: column;
 }
-
 .good-list {
   width: 100%;
   display: flex;
@@ -41,7 +48,6 @@
   justify-content: space-between;
   flex-grow: 1;
 }
-
 .good {
   width: 150px;
   height: 160px;
@@ -49,7 +55,6 @@
   border-radius: 5px;
   padding: 5px;
 }
-
 .good:hover {
   border: 2px solid rgb(52, 52, 52);
 }
@@ -58,7 +63,6 @@
   width: 100%;
   height: 120px;
 }
-
 .trolley {
   position: absolute;
   height: 60px;
@@ -93,7 +97,6 @@
   line-height: 15px;
   pointer-events: none;
 }
-
 .result {
   width: 100%;
   min-height: 80px;
@@ -129,45 +132,51 @@ module.exports = {
         },
       ],
       bought: [],
+      cnt: [0, 0, 0, 0],
     };
   },
   // TODO: 请补充实现代码
   computed: {
     totalPrice() {
       let price = 0;
-      let bought = this.bougth;
-      for (key in bought) {
-        price += bought[key].num * bought[key].price;
+      for (let i = 0; i < this.bought.length; i++) {
+        price += this.bought[i].price;
       }
       return price;
     },
     goodsDetail() {
-      let list = "";
-      let bought = this.bougth;
-      for (key in bought) {
-        list.concat(bought[key].name + '*' + bought[key].num + ' ');
+      let template = new String();
+      for (let i = 0; i < this.bought.length; i++) {
+        let name = this.bought[i].name;
+        if (!template.includes(name)) {
+          let num;
+          for (item in goods) {
+              if (name == this.goods[item].name) {
+                num = item;
+                break;
+              }
+          }
+          template += `${name}*${this.cnt[num]} `;
+        }
       }
-      return list;
+      return template;
     },
   },
   methods: {
-    addGood() {
-      let goods = this.goods,
-          bought = this.bought;
-      console.log($event);console.log($event.value);
-      for (key in bought) {
-        if (bought[key].cover !== $event.value) {
-          bought.push(() => {
-            for (item in goods) {
-              if (goods[item].cover !== $event.value) {
-                return goods[item];
-              }
-            }
-          })
-        } else {
-          bought[key].num++;
+    getGood(goods, goodName, cnt) {
+      for (let i = 0; i < goods.length; i++) {
+        if (goods[i].name == goodName) {
+          cnt[i]++;
+          return goods[i];
         }
       }
+    },
+    addGood() {
+      let cnt = this.cnt;
+      (goods = this.goods),
+        (bought = this.bought),
+        (goodName = event.dataTransfer.getData("good"));
+      bought.push(this.getGood(goods, goodName, cnt));
     }
   },
 };
