@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const btn = document.getElementById("btn")
 	// 点击开始书写按钮
 	btn.addEventListener("click", () => {
-		show(greetingDisplay)
+		show(greetingDisplay);
 	})
 })
 
@@ -17,7 +17,7 @@ const greetings = [
 
 // 随机数函数 从 greetings 随机取一个值并返回
 function writeGreeting() {
-	// TODO 带补充代码  
+	return greetings[Math.floor(Math.random() * 5)];
 }
 
 /*
@@ -26,6 +26,7 @@ function writeGreeting() {
 //  show 将 writeGreeting 函数中返回的内容显示在 greetingDisplay 元素中
 function show(greetingDisplay) {
 	// TODO 待补充代码
+	greetingDisplay.innerHTML = writeGreeting();
 }
 
 module.exports = { show, writeGreeting }

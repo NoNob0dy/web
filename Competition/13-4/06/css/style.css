@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: azure;
+    background-image: url('../images/background-pic.jpeg');
     background-size: cover;
     color: #fff;
     height: 945;
@@ -18,66 +18,71 @@ body {
     justify-content: flex-end;
 }
 
-.nav-bar p {
-    font-size: large;
-    color: cornflowerblue;
+.nav-bar img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
     margin: 15px;
 }
-
-
-/*TODO：请补充代码*/
 
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.form {
-    height: 600px;
-    width: 450px;
-    background-color: rgba(0, 0, 0, .45);
-    border-radius: 10px;
+    justify-content: center;
     text-align: center;
-}
-
-.content .form h2 {
-    font-size: 45px;
-    margin-top: 140px;
-    margin-bottom: 50px;
-    font-weight: 800;
-}
-
-.content .form input {
-    font-size: 20px;
-    border-radius: 5px;
-    width: 300px;
-    border: none;
-    text-align: center;
-    margin: 10px 0;
-}
-
-.content .form .btns button {
-    margin: 10px 0;
-    width: 80px;
-    height: 30px;
-    border-color: #041c32;
-    background-color: #2d4263;
-    font-size: 16px;
-    color: white;
 }
 
 .content img {
-    position: absolute;
     width: 200px;
     height: 200px;
-    z-index: 1;
     border-radius: 50%;
-    top: 0%;
+    position: absolute;
+    margin-top: -500px
+}
+
+.form {
+    width: 450px;
+    height: 600px;
+    background-color: rgba(0, 0, 0, .45);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.form h2 {
+    font-size: 45px;
+    font-weight: 800;
+    margin-top: 110px;
+    padding-bottom: 40px ;
+}
+
+.form button {
+    width: 80px;
+    height: 30px;
+    background-color: #2d4263;
+    border-color: #041c32;
+    color: white;
+    font-size: 16px;
+}
+
+.form input {
+    width: 300px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.text {
+    position: absolute;
+    margin-top: 325px
 }
 
 .text a {
-    color: white;
     text-decoration: none;
-    font-size: 16px;
+    color: white;
 }
