@@ -19,12 +19,15 @@ app.post('/add', function(req, res) {
     });
 })
 
+<<<<<<< HEAD
 app.get('/list', function(req, res) {
     fs.readFile(path.resolve(__dirname,'./users.json'), 'utf8', function(err, data) {
         data = JSON.parse(data);
         res.json(data);
     });
 })
+=======
+>>>>>>> bd545d0c982368f185922076aa4c310baccee200
 
 app.listen(8080, function() {
     console.log("访问地址:http://localhost:8080")
