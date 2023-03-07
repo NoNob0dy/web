@@ -6,157 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>会员权益领取中心</title>
   <link rel="stylesheet" href="css/style.css" />
-  <style>
-    #container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #nav {
-      display: flex;
-      width: 1440px;
-      height: 240px;
-      background-image: url("images/top_banner.png");
-    }
-
-    #card {
-      width: 290px;
-      height: 176px;
-      margin: 32px 150px 32px 1000px;
-      background-image: linear-gradient(180deg, #191720 0%, #080810 100%);
-      border-radius: 4px;
-    }
-
-    #card>div {
-      position: absolute;
-      background-image: url("./images/vip.png"), url("./images/touxiang.png");
-      background-repeat: no-repeat, no-repeat;
-      background-position: bottom right;
-      width: 50px;
-      height: 50px;
-      margin: 41px 216px 85px 24px;
-    }
-
-    #card>span {
-      position: absolute;
-    }
-
-    #card>span:nth-of-type(1) {
-      width: 80px;
-      height: 20px;
-      margin: 30px 116px 126px 94px;
-      font-family: PingFangSC-Regular;
-      font-size: 20px;
-      color: #FFFFFF;
-      letter-spacing: 0;
-      line-height: 20px;
-      font-weight: 400;
-    }
-
-    #card>span:nth-of-type(2) {
-      width: 22px;
-      height: 18px;
-      margin: 34px 86px 124px 182px;
-      font-family: SourceHanSansCN-Heavy;
-      font-size: 12px;
-      color: #FFC200;
-      letter-spacing: 0;
-      font-weight: 900;
-    }
-
-    #card>span:nth-of-type(3) {
-      width: 147px;
-      height: 14px;
-      margin: 63px 50px 99px 93px;
-      font-family: PingFangSC-Regular;
-      font-size: 14px;
-      color: #FFFFFF;
-      letter-spacing: 0;
-      line-height: 14px;
-      font-weight: 400;
-    }
-
-    #card>span:nth-of-type(4) {
-      width: 154px;
-      height: 12px;
-      margin: 89px 43px 75px 93px;
-      font-family: PingFangSC-Regular;
-      font-size: 12px;
-      color: #C6C6C6;
-      letter-spacing: 0;
-      line-height: 12px;
-      font-weight: 400;
-    }
-
-    #card>span:nth-of-type(5) {
-      width: 84px;
-      height: 14px;
-      margin: 130px 182px 32px 24px;
-      font-family: PingFangSC-Regular;
-      font-size: 14px;
-      color: #FFFFFF;
-      letter-spacing: 0;
-      line-height: 14px;
-      font-weight: 400;
-    }
-
-    #card>span:nth-of-type(6) {
-      width: 63px;
-      height: 14px;
-      margin: 130px 114px 32px 113px;
-      font-family: PingFangSC-Semibold;
-      font-size: 14px;
-      color: #FF9630;
-      letter-spacing: 0;
-      line-height: 14px;
-      font-weight: 600;
-    }
-
-    #card>span:nth-of-type(7) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 69px;
-      height: 24px;
-      margin: 125px 24px 27px 197px;
-      background: #FF9630;
-      border-radius: 4px;
-
-      font-family: PingFangSC-Regular;
-      font-size: 14px;
-      color: #FFFFFF;
-      letter-spacing: 0.14px;
-      font-weight: 400;
-    }
-
-    #content {
-      width: 1440px;
-      height: 1318px;
-    }
-
-    #title {
-      position: absolute;
-      margin-left: 630px;
-      margin-top: 60px;
-      font-family: PingFangSC-Medium;
-      font-size: 30px;
-      color: #232A33;
-      letter-spacing: 0;
-      text-align: center;
-      line-height: 30px;
-      font-weight: 500;
-    }
-
-    #tab {
-      position: absolute;
-      width: 760px;
-      height: 704px;
-      margin-top: 150px;
-      margin-left: 370px;
-    }
-  </style>
 </head>
 
 <body>
@@ -174,13 +23,123 @@
       </div>
     </div>
     <div id="content">
-      <div id="img_l"></div>
-      <span id="title">会员权益升级</span>
-      <div id="img_r"></div>
+      <div class="img_l"></div>
+      <span class="title">会员权益升级</span>
+      <div class="img_r"></div>
       <div id="tab">
+        <table>
+          <tr>
+            <td style="font-size: 16px; font-weight: 500; padding-left: 40px;">会员专属特权</td>
+            <td style="font-size: 16px; font-weight: 500;">
+              <img src="./images/gaojivip.png" />
+              高级会员
+            </td>
+            <td style="font-size: 16px; font-weight: 500;">
+              <img src="./images/vip.png" />
+              标准会员
+            </td>
+          </tr>
+          <tr>
+            <td><img src="./images/icon-jpkc.png" hspace=8 />50+ 备赛精品课</td>
+            <td><img src="./images/check.png" /></td>
+            <td>享受 8 折</td>
+          </tr>
+          <tr>
+            <td><img src="./images/icon-xm.png" hspace=12 />200+ 企业实战项目</td>
+            <td><img src="./images/check.png" /></td>
+            <td>享受 8 折</td>
+          </tr>
+          <tr>
+            <td><img src="./images/icon-syk.png" hspace=12 />400+ 编程实验课</td>
+            <td><img src="./images/check.png" /></td>
+            <td><img src="./images/check.png" /></td>
+          </tr>
+          <tr>
+            <td><img src="./images/icon-lj.png" hspace=12 />7大热招岗位学习路径</td>
+            <td><img src="./images/check.png" /></td>
+            <td>仅基础阶段可学</td>
+          </tr>
+          <tr>
+            <td><img src="./images/icon-hj.png" hspace=12 />保存 2 个开发环境</td>
+            <td><img src="./images/check.png" /></td>
+            <td><img src="./images/check.png" /></td>
+          </tr>
+          <tr>
+            <td><img src="./images/iconmb.png" hspace=12 />50+ IT 行业经典简历模板</td>
+            <td><img src="./images/check.png" hspace=12 /></td>
+            <td><img src="./images/wu.png" / hspace=12></td>
+          </tr>
+          <tr>
+            <td><img src="./images/icon-zdk.png" hspace=12 />20讲简历面试指导课</td>
+            <td><img src="./images/check.png" / hspace=12></td>
+            <td><img src="./images/wu.png" hspace=12 /></td>
+          </tr>
+          <tr>
+            <td><img src="./images/icon-mnms.png" hspace=12 />模拟面试 1 次</td>
+            <td><img src="./images/check.png" /></td>
+            <td><img src="./images/wu.png" /></td>
+          </tr>
+          <tr>
+            <td><img src="./images/icon-tj.png" hspace=12 />实习推荐 1 次</td>
+            <td><img src="./images/check.png" /></td>
+            <td><img src="./images/wu.png" /></td>
+          </tr>
+          <tr>
+            <td><img src="./images/icon-more.png" hspace=12 />更多精选内容</td>
+            <td><img src="./images/check.png" /></td>
+            <td><img src="./images/wu.png" /></td>
+          </tr>
+        </table>
+      </div>
+      <div id="side">
+        <div id="vip">
+          <div class="tagTop">每日仅2.1元</div>
+          <span>高级会员</span>
+          <span>标准会员</span>
+          <span>订单详情</span>
+          <span class="order">开通时常</span>
+          <span class="selected">
+            <div class="tagMid">赠送30天</div>1年
+          </span>
+          <span class="notSelected">
+            <div class="tagMid">赠送30天</div>2年
+          </span>
+          <span class="order">
+            <img src="./images/xuanzhong1.png" style="width: 16px; height: 16px;" hspace=10 />优惠券
+          </span>
+          <span class="order">
+            100元优惠券<img src="./images/lujing.png" style="width: 7px; height: 10.5px;" hspace=10 />
+          </span>
+          <span class="order">
+            <img src="./images/weixuanzhong1.png" style="width: 16px; height: 16px;" hspace=10 />优惠码
+          </span>
+          <span class="order">支付方式</span>
+          <span class="selected"></span>
+          <span class="notSelected"></span>
+          <span class="notSelected"></span>
+          <span class="order">订单金额</span>
+          <span>￥1200</span><span>￥720</span>
+          <span>登录并开通</span>
+          <span>
+            <img src="./images/tucenggouxuan.png" style="width: 16px; height: 16px;" hspace=8 />同意蓝桥云课VIP会员使用协议
+          </span>
+        </div>
+      </div>
+      <div id="bot">
+        <div class="img_l" style="margin-left: 540px;"></div>
+        <span class="title" style="margin-left: 645px;">备赛精品课</span>
+        <div class="img_r" style="margin-left: 811px;"></div>
+        <span id="description">名师备赛精品课，助你一站式夺奖</span>
+      </div>
+      <div id="footer">
+        <img src="./images/zuoce.png" style="width: 40px; height: 40px;" />
+        <img src="./images/courses1.png" />
+        <img src="./images/courses2.png" />
+        <img src="./images/courses3.png" />
+        <img src="./images/courses4.png" />
+        <img src="./images/youce.png" style="width: 40px; height: 40px;" />
       </div>
     </div>
-  </div>
   </div>
 </body>
 

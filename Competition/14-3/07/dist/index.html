@@ -43,16 +43,16 @@
                     return store.getters.welcome
                 },
                 username() {
-                    return store.getters.username
+                    return store.getters["user/username"]
                 },
                 token() {
-                    return store.getters.token
+                    return store.getters["user/token"]
                 }
             },
             methods: {
                 // 回车/点击确认的回调事件
                 login(username) {
-                    username && store.commit('login', { username, token: 'sxgWKnLADfS8hUxbiMWyb' })
+                    username && store.commit('user/login', { username, token: 'sxgWKnLADfS8hUxbiMWyb' })
                     username && store.commit('say', '登录成功，欢迎你回来！')
                 }
             }
