@@ -11,22 +11,22 @@
 </template>
 
 <script>
-import axios from "../../node_modules/axios/dist/axios.js";
-function getData() {
-  return axios.get("../../public/static/data/list.json").then((res) => {
-    console.log(res.data.listinfo);
-    this.list = res.data.listinfo;
-  });
-}
+import axios from "../../node_modules/axios/dist/axios";
+let data = [];
+axios.get("static/data/list.json").then((res) => {
+  for (let i = 0; i < res.data.data.listInfo.length; i++) {
+    data.push(res.data.data.listInfo[i]);
+  }
+});
+
 export default {
   data() {
     return {
-      list: [],
+      list: data,
     };
   },
 };
 
-getData();
 </script>
 
 <style scoped>

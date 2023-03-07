@@ -19,6 +19,12 @@ app.post('/add', function(req, res) {
     });
 })
 
+app.get('/list', function(req, res) {
+    fs.readFile(path.resolve(__dirname,'./users.json'), 'utf8', function(err, data) {
+        data = JSON.parse(data);
+        res.json(data);
+    });
+})
 
 app.listen(8080, function() {
     console.log("访问地址:http://localhost:8080")
