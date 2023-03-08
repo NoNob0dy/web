@@ -19,7 +19,7 @@
 
 <body>
 	<div id="app">
-		<input type="text" placeholder="请输入要搜索的菜单内容" v-model="search" @keyup="listFilter()" />
+		<input type="text" placeholder="请输入要搜索的菜单内容" v-model="search" />
 		<ul>
 			<li v-for="father in filtered">
 				<span :style="selectedStyle(father.meta.title)">{{father.meta.title}}</span>

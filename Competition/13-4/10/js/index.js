@@ -21,27 +21,24 @@ const app = new Vue({
 
     listFilter() {
       if (this.search == "") {
+        this.init();
         return;
       } else {
-        //为什么this.filterd = []的位置会影响页面渲染呢？是因为keyup事件吗？
+        let flag = false;
         this.filtered = [];
-        let flag = false, list = this.list, filtered = this.filtered;
-        for (father in list) {
+        for (father in this.list) {
           flag = false;
-          if (this.ifSelected(list[father].meta.title)) {
+          if (this.ifSelected(this.list[father].meta.title)) {
             flag = true;
           }
-          for (child in list[father].children) {
-            if (this.ifSelected(list[father].children[child].meta.title)) {
+          for (child in this.list[father].children) {
+            if (this.ifSelected(this.list[father].children[child].meta.title)) {
               flag = true;
             }
           }
           if (flag) {
-            filtered.push(list[father]);
+            this.filtered.push(this.list[father]);
           }
-        }
-        if (!flag) {
-          this.init();
         }
       }
     },
@@ -61,7 +58,12 @@ const app = new Vue({
         return "";
       }
     }
-  }
+  },
+  watch: {
+    search() {
+      this.listFilter();
+    }
+  },
 });
 
 app.init();
