@@ -6,7 +6,6 @@
 	<title>任务管理器</title>
 
 	<link type="text/css" href="css/style.css" rel="stylesheet" />
-
 </head>
 
 <body>
@@ -17,24 +16,24 @@
 			<div class="input">
 				<span>内容</span>
 				<input type="text" placeholder="请输入你要做的事" v-model="todo" />
-				<span id='add' @click="add()">确认</span>
+				<span id='add' @click="addThis()">确认</span>
 			</div>
 		</div>
 
 		<ul class="list">
-			<li v-show="ifShow">
+			<li v-if="!todos.length">
 				暂无数据
 			</li>
-			<li v-for="todo, index in todos">
+			<li v-else v-for="item, index in todos">
 				<span class="xh">{{index + 1}}</span>
-				<span>{{todo}}</span>
-				<span class="qc" @click="deleteTodo(index)"></span>
+				<span>{{item}}</span>
+				<span class="qc" @click="deleteThis(index)"></span>
 			</li>
-			<li v-show="!ifShow">
+			<li v-if="todos.length">
 				<b>
 					总数：{{todos.length}}
 				</b>
-				<b id='clear' @click="deleteTodos()">清除</b>
+				<b id='clear' @click="deleteAll()">清除</b>
 			</li>
 		</ul>
 	</div>
@@ -42,28 +41,21 @@
 	<script>
 		var top = new Vue({
 			el: "#box",
-			data() {
-				return {
-					todo: "",
-					todos: []
-				}
-			},
-			computed: {
-				ifShow() {
-					return this.todos.length == 0 ? true : false;
-				}
+			data: {
+				todo: "",
+				todos: []
 			},
 			methods: {
-				add() {
+				addThis() {
 					if (this.todo != "") {
 						this.todos.push(this.todo);
 						this.todo = "";
 					}
 				},
-				deleteTodo(index) {
+				deleteThis(index) {
 					this.todos.splice(index, 1);
 				},
-				deleteTodos() {
+				deleteAll() {
 					this.todos = [];
 				}
 			}

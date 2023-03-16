@@ -21,13 +21,37 @@
   width: 204px;
   height: 204px;
   margin: 20px;
-  background-image: linear-gradient(
-    rgb(252, 213, 136) 33.3%,
-    #fff493 0,
-    #fdf45d 66.6%,
-    #f8da47 0
-  );
+  background-image: linear-gradient(rgb(252, 213, 136) 33.3%,
+      #fff493 0,
+      #fdf45d 66.6%,
+      #f8da47 0);
   background-size: 6px 6px;
 }
 
-/* TODO：待补充代码 */
+#box1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#box2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+#box2 span:nth-of-type(2) {
+  align-self: flex-end;
+}
+
+#box3 {
+  display: flex;
+  justify-content: space-between;
+}
+
+#box3 span:nth-of-type(2) {
+  align-self: center;
+}
+
+#box3 span:nth-of-type(3) {
+  align-self: flex-end;
+}
