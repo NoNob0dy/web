@@ -16,9 +16,9 @@ function startGame() {
 
     for (let i = 1; i <= imgs.length; i++) {
         let imgBox = $(`#item${i}`);
-        imgBox.click(() => {
-            time++;
+        imgBox.on("click", () => {
             if (imgBox.attr("style.visibility") != "hidden") {
+                time++;
                 let img = $(`#fruit${i}`);
                 img.css("display", "inline");
                 if (time % 2 != 0) {
@@ -27,6 +27,7 @@ function startGame() {
                 } else {
                     let preImg = $(`#fruit${pre.index}`),
                         preImgBox = $(`#item${pre.index}`);
+                    //I don't know if it is neccessory, but its dangerous
                     imgBoxes.css("pointer-events", "none");
                     if (pre.src == img.attr('src')) {
                         setTimeout(() => {
