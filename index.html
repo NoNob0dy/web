@@ -1,18 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        console.log(1);
-        for (let i in 10) {
-            console.log(1);
+    <style>
+        div {
+            width: 64px;
+            height: 64px;
+            background-color: aqua;
+            animation: scaling 2s ease-in infinite;
         }
-    </script>
+
+        div:hover {
+            transform: rotate(45deg);
+            transition: transform 1.5s ease-in-out
+        }
+
+        @keyframes scaling {
+            0% {
+                width: 64px
+            }
+
+            25% {
+                width: 100px
+            }
+
+            50% {
+                width: 200px
+            }
+
+            75% {
+                width: 100px
+            }
+
+            100% {
+                width: 64px
+            }
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div></div>
 </body>
+
 </html>
