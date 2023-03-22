@@ -56,7 +56,7 @@
 			let fp = document.querySelectorAll(".form-group");
 			let success = {name: false, id: false};
 			let name = new RegExp(/^[\u4e00-\u9fa5]{2,4}$/),
-				id = new RegExp(/^[0-9]{1,12}$/);
+				id = new RegExp(/^\d{1,12}$/);
 			let alertName = document.getElementById("vail_name");
 				alertId = document.getElementById("vail_studentId");
 			if (!name.test(studentName.value)) {

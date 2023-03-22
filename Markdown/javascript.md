@@ -36,7 +36,18 @@ parent.appendChild(node);
 ```js
 const reg = new RegExp(//);
 var string = "I'm going to be tested";
-if (reg.test(string)) { ... } 
-else { ... }
+if (reg.test(string)) { //... } 
+else { //... }
+```
+
+#### Object
+
+```js
+//遍历
+for (key in object) { //... }
+
+const keys = Object.keys(object);
+    	   //Object.getOwnPropertyNames(object);
+for (key in keys) { //object[key] }     
 ```
 
