@@ -31,23 +31,73 @@ node.onclick = () => {
 parent.appendChild(node);
 ```
 
-#### RegExp
+#### Reg-Exp
 
 ```js
 const reg = new RegExp(//);
 var string = "I'm going to be tested";
-if (reg.test(string)) { //... } 
-else { //... }
+if (reg.test(string)) { /*...*/ } 
+else { /*...*/ }
 ```
 
 #### Object
 
 ```js
 //遍历
-for (key in object) { //... }
-
+for (key in object) { /*...*/ }
 const keys = Object.keys(object);
-    	   //Object.getOwnPropertyNames(object);
-for (key in keys) { //object[key] }     
+//	  keys = Object.getOwnPropertyNames(object);
+for (key in keys) { /*object[key]*/ }     
+
+let obj;
+//set
+obj = new Set([0]);
+obj.add(999);
+if (obj.has(999)) {
+    obj.forEach((val, index) => {
+        obj.delete(val);
+		/*...*/
+	})
+}
+obj.clear();
+//map
+obj = new Map (
+    ["juice", 999], 
+    ["wrld", "forever"]
+);
+obj.set("den21s", "love");
+if (obj.get("den21s").equals("love")) {
+    obj.forEach((val, key) => {
+		/*...*/
+    })
+}
+obj.clear()
+```
+
+#### ES6 Array
+
+```javascript
+//initialize
+let arr = Array.of(5, 4, 3, 2, 1);
+//	arr = Array.from({length: 5}, (v, k) => (5 - k))
+
+//sort
+arr.sort((x, y) => {
+    if (x < y) {
+      return -1;
+    } else if (x == y) {
+      return 0;
+    } else {
+      return 1;
+    }
+});
+
+//findIndex & find
+let val = arr.find((val, index) => {
+    return val > 3;
+});
+let index = arr.findIndex((val, index) => {
+    return val > 3;
+});
 ```
 
