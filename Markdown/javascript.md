@@ -13,9 +13,8 @@ sessionStorage.ShopNumber = "2"
 #### DOM
 
 ```js
-/*
-	remember to place this script right down below <body> tag,     then DOM elements in <body> will be rendered and readable 
-*/
+/*remember to place this script right down below <body> tag,     
+then DOM elements in <body> will be rendered and readable*/
 var node = document.createElement("div"),
     text = document.createTextNode("I'm div"),
     attr = document.createAttribute("identify"),

@@ -31,8 +31,11 @@ elem.removeClass("age");
 elem.toggleClass("input");
 elem.css("font-weight", 21);
 //animation
-$('E').animate({}, ease-in, () => {})
-//it appears that animate didn't support transform attriubte
+function animation() {
+    $('E').animate({ /*css*/ }, speed, animation);
+    //animate didn't support transform attriubte
+}
+//using recursive function to make animation infinite
 //iteration
 $('E').each((index, elem) => {})
 ```
