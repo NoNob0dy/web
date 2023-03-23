@@ -1,4 +1,4 @@
-#### flex垂直水平居中
+#### flex alignment
 
 ```css
 E {
@@ -9,7 +9,7 @@ E {
 }
 ```
 
-#### 媒体查询
+#### media query
 
 ```css
 @media screen and (orientation: landscape) or (min-width: 10px){
@@ -17,7 +17,7 @@ E {
 }
 ```
 
-#### 元素效果
+#### element effects
 
 ```css
 div {

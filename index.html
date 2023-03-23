@@ -6,13 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script>
+        $(document).ready(function () {
+            $("div").animate({
+                transform: "rotate(45deg)"
+            });
+        });
     </script>
-
 </head>
 
 <body>
+    <div style="background:#98bf21;height:100px;width:100px;position:absolute;"></div>
 
 </body>
 
