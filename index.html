@@ -6,51 +6,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 </head>
 
 <body>
     <div id="app">
-        <Global />
+        <div v-for='item, index in list' :key="item.id" :content="item.content">
+            <Global :content="item.content"/>
+        </div>
         <Local />
     </div>
     <script>
         var localComponent = {
-            template: `<div>I'm child Component<div>`
+            template: `<div>I'm child Component</div>`
         };
         Vue.component('Global', {
             props: {
                 "content": String
             },
             template: `
-                <div v-for='item, index in list' :key="item.id" :content="item.content">
-                    <span v-if="item.content == content[index]">
-                        {{ item.content }}
-                    </span>
-                </div>
+                <span>
+                    {{ content }}
+                </span>
             `,
             data() {
-                return {
-                    list: []
-                }
-            }
+                return {}
+            },
         });
         var app = new Vue({
             el: '#app',
             data() {
                 return {
+                    list: [],
                     str: "I'm den21s"
                 }
             },
             components: {
-                "Local": childComponent
+                "Local": localComponent
             },
             created() {
                 axios('./data.json').then(res => {
                     for (item in res.data) {
                         this.list.push(res.data[item]);
                     }
+                    console.log(this.list);
                 });
             },
         });
