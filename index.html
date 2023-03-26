@@ -6,19 +6,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://vuejs.org/js/vue.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("div").animate({
-                transform: "rotate(45deg)"
-            });
-        });
-    </script>
 </head>
 
 <body>
-    <div style="background:#98bf21;height:100px;width:100px;position:absolute;"></div>
-
+    <div id="app">
+        {{list | }}
+    </div>
 </body>
+
+<script>
+    /*var childComponent = {
+        template: tags
+    };
+    Vue.component('parentComponent', {
+        props: {
+
+        },
+        template: tags,
+        data() {
+            return {}
+        }
+    });*/
+    new Vue({
+        el: '#app',
+        /*components: {
+            template: component
+        },*/
+        data() {
+            return {
+                list: ''
+            }
+        },
+        created() {
+            /*axios('.json').then(res => {
+                for (item in res.data) {
+                    this.list.push(res.data[item]);
+                }
+            });*/
+        },
+        computed() {
+            return {
+                getter: { 
+                    str: () => {
+                        alert("changed");        
+                    } 
+                },
+                setter: { 
+                    str: () => {
+                        alert("assigned");
+                    }
+                }
+            }
+        },
+        watch() {
+            return {
+                str: (newVal, oldVal) => {
+                    alert("I'm watching");
+                }
+            }
+        },
+        filters() {
+            //useage: list | listFilter
+            return {
+                strFilter: (val) => {
+                    return ""
+                }
+            }
+        },
+        methods() {
+            return {}
+        }
+    });
+</script>
 
 </html>
