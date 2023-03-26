@@ -21,12 +21,13 @@
         };
         Vue.component('Global', {
             props: {
-                "key": Number,
                 "content": String
             },
             template: `
                 <div v-for='item, index in list' :key="item.id" :content="item.content">
-                    {{ item.content }}
+                    <span v-if="item.content == content[index]">
+                        {{ item.content }}
+                    </span>
                 </div>
             `,
             data() {
