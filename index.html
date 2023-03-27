@@ -8,54 +8,37 @@
     <title>Document</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        .nationOne { 
+            width: 100px;
+            height: 100px;
+        }
+        .nationTwo {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <div v-for='item in list' :key="item.id">
-            <Global :content="item.content" @send="receive"/>
-        </div>
-        <Local />
+        <div :class="[
+                 	'nationOne', 
+                 	'nationTwo'
+                 ]" :style="{ backgroundColor: 'green' }"></div>
+        <div :class="{
+                 	'nationOne': ifBind[0], 
+                 	'nationTwo': ifBind[1], 
+                 }" :style="{ backgroundColor: 'red' }"></div>
     </div>
     <script>
-        var localComponent = {
-            template: `<div>I'm child Component</div>`
-        };
-        Vue.component('Global', {
-            props: {
-                "content": String
-            },
-            template: `
-                <span @click="$emit('send', content)">
-                    {{ content }}
-                </span>
-            `,
-            data() {
-                return {}
-            },
-        });
         var app = new Vue({
             el: '#app',
             data() {
                 return {
-                    list: [],
-                    str: "I'm den21s"
-                }
-            },
-            components: {
-                "Local": localComponent
-            },
-            created() {
-                axios('./data.json').then(res => {
-                    for (item in res.data) {
-                        this.list.push(res.data[item]);
-                    }
-                });
-            },
-            methods: {
-                receive(msg) {
-                    console.log(msg);
+                    ifBind: [true, false]
                 }
             }
         });
