@@ -1,4 +1,4 @@
-##### Vue
+#### Vue
 
 ```html
 <div id="app">
@@ -92,14 +92,73 @@
 </script>
 ```
 
-#### SFC (Singal File Component)
+#### SFC & v-order
 
-```html
-<template></template>
+```vue
+<!--Singal File Component-->
+<template>
+	<Component />
+    <div :class="[
+                 	'nationOne', 
+                 	'nationTwo'
+                 ]"
+         :style="{ backgroundColor: 'green' }"></div>
+    <div :class="{
+                 	'nationOne': ifBind[0], 
+                 	'nationTwo': ifBind[1], 
+                 }"
+         :style="{ backgroundColor: 'red' }"></div>
+</template>
 <script>
+    import Component from *.vue
     export default {
-        
+        data() {
+            return {
+                ifBind: [true, false]
+            }
+        }
+    }
+</script>
+<style>
+    .nationOne { 
+    	width: 100px;
+        height: 100px;
+    }
+    .nationTwo {
+        width: 200px;
+        height: 200px;
+    }
+</style>
+```
+
+#### Router
+
+```vue
+<!--Singal File Component-->
+<template>
+	<router-link to="/home">Home</router-link>
+	<router-link to="/award">Award</router-link>
+	<router-view></router-view>
+</template>
+<script>
+    const Home = {
+        template: "<div>Home</div>"
+    };
+    const Award = {
+        template: "<div>Award</div>"
+    };
+	const router = new VueRouter({[{ 
+            path: '/home', 
+            component: Home 
+        }, { 
+            path: '/award', 
+            component: Award 
+        }        
+    ]});
+    export default {
+        router
     }
 </script>
 <style></style>
 ```
+
