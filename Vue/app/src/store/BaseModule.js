@@ -8,9 +8,11 @@ const BaseModule = {
         },
     },
     mutations: {
-        base(state, username) {
+        base(state, { username }) {
             state.welcome += ', ' + username;
         },
     },
     actions: {}
 }
+
+export default BaseModule

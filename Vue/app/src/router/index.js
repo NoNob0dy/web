@@ -23,7 +23,7 @@ const routes = [
  * @description history 需要服务端支持
  */
 const Router = new VueRouter({
-  mode:'history',
+  mode: 'history',
   routes
 })
 

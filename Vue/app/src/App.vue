@@ -6,36 +6,37 @@
       <router-link to="/award">Go to Award</router-link>
     </p>
     <router-view></router-view>
-    <Button v-if="token == null" @click="btn('den21s')" v-text="register"></Button>
+    <input v-if="token == null" type="button" @click="btn('den21s')" value="register" />
   </div>
 </template>
 
 <script>
-  import Store from "./store";
-  export default {
-    name: "App",
-    store: Store,
-    data() {
-      return {}
+import Store from "./store"
+export default {
+  name: "App",
+  store: Store,
+  data() {
+    return {}
+  },
+  computed: {
+    welcome() {
+      return Store.getters.welcome
     },
-    computed: {
-      welcome() {
-        return Store.getters.welcome
-      },
-      username() {
-        return Store.getters["user/username"]
-      },
-      token() {
-        return Store.getters["user/token"]
-      }
+    username() {
+      return Store.getters["user/username"]
     },
-    methods: {
-      btn(username) {
-        username && Store.commit('user/register', { username, token: 'sxgWKnLADfS8hUxbiMWyb' })
-        username && Store.commit('base', { username })
-      }
+    token() {
+      return Store.getters["user/token"]
     }
-  };
+  },
+  methods: {
+    btn(username) {
+      console.log(username);
+      username && Store.commit('user/register', { username, token: 'sxgWKnLADfS8hUxbiMWyb' })
+      username && Store.commit('base', { username })
+    }
+  }
+};
 </script>
 
 <style></style>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import BaseModule from './BaseModule';
-import UserModule from './UserModule';
+import BaseModule from './BaseModule'
+import UserModule from './UserModule'
 
 Vue.use(Vuex);
 
@@ -11,6 +11,5 @@ const Store = new Vuex.Store({
         user: UserModule,
     },
 })
-window.$store = Store
 
 export default Store;

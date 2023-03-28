@@ -146,8 +146,6 @@ const app = new Vue({
 app.$mount("#app");
 ```
 
-
-
 ```js
 /*router/index.js*/
 import Vue from 'vue'
@@ -207,7 +205,114 @@ export default Router
 
 #### Vuex
 
+```js
+/*store/index.js*/
+import Vue from 'vue'
+import Vuex from 'vuex'
+import BaseModule from './BaseModule'
+import UserModule from './UserModule'
+
+Vue.use(Vuex);
+
+const Store = new Vuex.Store({
+    modules: {
+        base: BaseModule,
+        user: UserModule,
+    },
+})
+
+export default Store;
 ```
 
+```js
+/*store/BaseModule.js*/
+const BaseModule = {
+    state: () => ({
+        welcome: 'welcome'
+    }),
+    getters: {
+        welcome(state) {
+            return state.welcome
+        },
+    },
+    mutations: {
+        base(state, { username }) {
+            state.welcome += ', ' + username;
+        },
+    },
+    actions: {}
+}
+
+export default BaseModule
+```
+
+```js
+/*store/UserModule*/
+const UserModule = {
+    namespaced: true,
+    state: () => ({
+        username: '',
+        token: null,
+    }),
+    getters: {
+        username(state) {
+            return state.username
+        },
+        token(state) {
+            return state.token
+        }
+    },
+    mutations: {
+        register(state, { username, token }) {
+            state.username = username
+            state.token = token
+        },
+    },
+}
+
+export default UserModule
+```
+
+```vue
+<template>
+  <div id="app">
+    <h1>{{ welcome }}</h1>
+    <input v-if="token == null" type="button" @click="btn('den21s')" value="register" />
+  </div>
+</template>
+
+<script>
+import Store from "./store"
+export default {
+  name: "App",
+  store: Store,
+  data() {
+    return {}
+  },
+  computed: {
+    welcome() {
+      return Store.getters.welcome
+    },
+    username() {
+      return Store.getters["user/username"]
+    },
+    token() {
+      return Store.getters["user/token"]
+    }
+  },
+  methods: {
+    btn(username) {
+      console.log(username);
+      username && Store.commit('user/register', { 
+          username, 
+          token: 'success' 
+      })
+      username && Store.commit('base', { username })
+    }
+  }
+};
+</script>
+
+<style></style>
 ```
 
