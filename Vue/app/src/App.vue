@@ -1,42 +1,24 @@
 <template>
   <div id="app">
-    <h1>{{ welcome }}</h1>
-    <p>
-      <router-link to="/">Go to Home</router-link>
-      <router-link to="/award">Go to Award</router-link>
-    </p>
-    <router-view></router-view>
-    <input v-if="token == null" type="button" @click="btn('den21s')" value="register" />
+    <Store />
+    <Router />
+    <Echarts />
   </div>
 </template>
 
 <script>
-import Store from "./store"
-export default {
-  name: "App",
-  store: Store,
-  data() {
-    return {}
-  },
-  computed: {
-    welcome() {
-      return Store.getters.welcome
+  import StoreComponent from "./components/StoreComponent.vue"
+  import EchartsComponent from "./components/EchartsComponent.vue"
+  import { RouterComponent, Router } from "./components/RouterComponent.vue"
+  export default {
+    name: "App",
+    components: {
+      Store: StoreComponent,
+      Router: RouterComponent,
+      Echarts: EchartsComponent
     },
-    username() {
-      return Store.getters["user/username"]
-    },
-    token() {
-      return Store.getters["user/token"]
-    }
-  },
-  methods: {
-    btn(username) {
-      console.log(username);
-      username && Store.commit('user/register', { username, token: 'sxgWKnLADfS8hUxbiMWyb' })
-      username && Store.commit('base', { username })
-    }
-  }
-};
+    router: Router,
+  };
 </script>
 
 <style></style>
