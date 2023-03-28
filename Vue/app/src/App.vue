@@ -2,22 +2,22 @@
   <div id="app">
     <Store />
     <Router />
-    <Echarts />
+    <Chart />
   </div>
 </template>
 
 <script>
   import StoreComponent from "./components/StoreComponent.vue"
+  import RouterComponent from "./components/RouterComponent.vue"
   import EchartsComponent from "./components/EchartsComponent.vue"
-  import { RouterComponent, Router } from "./components/RouterComponent.vue"
   export default {
     name: "App",
     components: {
       Store: StoreComponent,
       Router: RouterComponent,
-      Echarts: EchartsComponent
-    },
-    router: Router,
+      Chart: EchartsComponent
+    }
+
   };
 </script>
 
