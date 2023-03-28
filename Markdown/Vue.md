@@ -155,17 +155,15 @@ import Award from '../components/AwardComponent.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/award',
-    name: 'Award',
-    component: Award,
-  }
+const routes = [{
+        path: '/',
+        name: 'Home',
+        component: Home
+	}, {
+		path: '/award',
+		name: 'Award',
+        component: Award,
+	}
 ]
 
 /**
@@ -173,8 +171,8 @@ const routes = [
  * @description history 需要服务端支持
  */
 const Router = new VueRouter({
-  mode:'history',
-  routes
+	mode:'history',
+	routes
 })
 
 export default Router
@@ -183,24 +181,23 @@ export default Router
 ```vue
 <!--App.vue-->
 <template>
-  <div id="app">
-    <h1>Hello App!</h1>
-    <p>
-      <router-link to="/">Go to Home</router-link>
-      <router-link to="/award">Go to Award</router-link>
-    </p>
-    <router-view></router-view>
-  </div>
+	<div id="app">
+		<h1>Hello App!</h1>
+        <p>
+			<router-link to="/">Go to Home</router-link>
+			<router-link to="/award">Go to Award</router-link>
+        </p>
+		<router-view></router-view>
+	</div>
 </template>
 
 <script>
-  export default {
-    name: "App",
-  };
+    export default {
+        name: "App",
+    };
 </script>
 
-<style>
-</style>
+<style></style>
 ```
 
 #### Vuex
@@ -275,42 +272,42 @@ export default UserModule
 
 ```vue
 <template>
-  <div id="app">
-    <h1>{{ welcome }}</h1>
-    <input v-if="token == null" type="button" @click="btn('den21s')" value="register" />
-  </div>
+	<div id="app">
+		<h1>{{ welcome }}</h1>
+		<input v-if="token == null" type="button" 			
+               @click="btn('den21s')" value="register" />
+	</div>
 </template>
 
 <script>
-import Store from "./store"
-export default {
-  name: "App",
-  store: Store,
-  data() {
-    return {}
-  },
-  computed: {
-    welcome() {
-      return Store.getters.welcome
-    },
-    username() {
-      return Store.getters["user/username"]
-    },
-    token() {
-      return Store.getters["user/token"]
-    }
-  },
-  methods: {
-    btn(username) {
-      console.log(username);
-      username && Store.commit('user/register', { 
-          username, 
-          token: 'success' 
-      })
-      username && Store.commit('base', { username })
-    }
-  }
-};
+	import Store from "./store"
+    export default {
+		name: "App",
+        store: Store,
+        data() {
+        	return {}
+        },
+        computed: {
+            welcome() {
+            	return Store.getters.welcome
+            },
+            username() {
+                return Store.getters["user/username"]
+            },
+            token() {
+                return Store.getters["user/token"]
+            }
+        },
+        methods: {
+        	btn(username) {
+                username && Store.commit('user/register', { 
+                    username, 
+                    token: 'success' 
+                })
+                username && Store.commit('base', { username })
+            }
+        }
+    };
 </script>
 
 <style></style>
