@@ -133,32 +133,81 @@
 
 #### Router
 
+```js
+/*main.js*/
+import Vue from "vue";
+import App from "./App.vue";
+import Router from "./router";
+
+const app = new Vue({ 
+  router: Router,
+  render: h => h(App) 
+});
+app.$mount("#app");
+```
+
+
+
+```js
+/*router/index.js*/
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../components/HomeComponent.vue'
+import Award from '../components/AwardComponent.vue'
+
+Vue.use(VueRouter)
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/award',
+    name: 'Award',
+    component: Award,
+  }
+]
+
+/**
+ * @description hash 兼容性好
+ * @description history 需要服务端支持
+ */
+const Router = new VueRouter({
+  mode:'history',
+  routes
+})
+
+export default Router
+```
+
 ```vue
-<!--Singal File Component-->
+<!--App.vue-->
 <template>
-	<router-link to="/home">Home</router-link>
-	<router-link to="/award">Award</router-link>
-	<router-view></router-view>
+  <div id="app">
+    <h1>Hello App!</h1>
+    <p>
+      <router-link to="/">Go to Home</router-link>
+      <router-link to="/award">Go to Award</router-link>
+    </p>
+    <router-view></router-view>
+  </div>
 </template>
+
 <script>
-    const Home = {
-        template: "<div>Home</div>"
-    };
-    const Award = {
-        template: "<div>Award</div>"
-    };
-	const router = new VueRouter({[{ 
-            path: '/home', 
-            component: Home 
-        }, { 
-            path: '/award', 
-            component: Award 
-        }        
-    ]});
-    export default {
-        router
-    }
+  export default {
+    name: "App",
+  };
 </script>
-<style></style>
+
+<style>
+</style>
+```
+
+#### Vuex
+
+```
+
 ```
 
