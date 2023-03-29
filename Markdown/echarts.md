@@ -38,7 +38,6 @@
     components: {
       ECharts,
     }
-
   };
 </script>
 
@@ -48,28 +47,83 @@
 ```js
 /*./echarts/index.js*/
 const EChartsOption = {
-    title: {
-        text: 'NationAward',
-    },
-    grid: {
-    	show: true,
-        top: '10px',
-	},
-    xAsix:   {
-    
-	}
-    tooltip: {
-        trigger: 'item'
-    },
-    legend: {
-        orient: 'vertical',
-        left: 'left'
-    },
-    series: [ /*......*/ ]
+    /*ECharts Types*/
 }
-
 export default EChartsOption
 ```
+
+#### ECharts Types
+
+- ```js
+  /*bar*/
+  option = {
+      xAxis: {
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+      },
+        yAxis: {},
+        series: [{
+            type: 'bar',
+            data: [23, 24, 18, 25, 27]
+            stack: 'x'
+          },{
+            type: 'bar',
+            data: [16, 14, 9, 13, 14]
+            stack: 'x'
+          },
+        ]
+  }
+  ```
+
+- ```js
+  /*line*/
+  option = {
+    	xAxis: {
+      	type: 'category',
+      	data: ['L', 'O', 'V', 'E']
+    	},
+    	yAxis: {
+      	type: 'value'
+    	},
+      series: [{
+      	data: [1, 3, 1, 4],
+          type: 'line'
+        }, {
+      	data: ['-', 9, 9, '-'],
+          type: 'line'
+        },
+      ]
+  };
+  ```
+
+- ```js
+  /*pie*/
+  option = {
+  	series: [{
+  		type: 'pie',
+        	data: [{
+            	value: 999,
+            	name: 'I love'
+          }, {
+            	value: 1314,
+            	name: 'zfm'
+          }]
+      }]
+  };
+  ```
+
+- ```js
+  /*scatter*/
+  option = {
+    	xAxis: {
+      	data: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu']
+    	},
+    	yAxis: {},
+    	series: [{
+        	type: 'scatter',
+        	data: [220, 182, 191, 234, 290, 330, 310]
+      }]
+  };
+  ```
 
 ```js
 /*main.js*/
@@ -92,37 +146,5 @@ const app = new Vue({
 app.$mount("#app");
 ```
 
-#### ECharts Series
-
-- ```
-  
-  ```
-
-- ```
-  
-  ```
-
-- ```
-  
-  ```
-
-- ```
-  
-  ```
-
-- ```
-  
-  ```
-
-- ```
-  
-  ```
-
-- ```
-  
-  ```
-
-  
-
-
+#### 
 
