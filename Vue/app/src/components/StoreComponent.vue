@@ -6,29 +6,29 @@
 </template>
   
 <script>
-  import Store from "../store"
+  import store from "../store"
   export default {
     name: "StoreComponent",
-    store: Store,
+    store,
     data() {
       return {}
     },
     computed: {
       welcome() {
-        return Store.getters.welcome
+        return store.getters.welcome
       },
       username() {
-        return Store.getters["user/username"]
+        return store.getters["user/username"]
       },
       token() {
-        return Store.getters["user/token"]
+        return store.getters["user/token"]
       }
     },
     methods: {
       btn(username) {
         console.log(username);
-        username && Store.commit('user/register', { username, token: 'sxgWKnLADfS8hUxbiMWyb' })
-        username && Store.commit('base', { username })
+        username && store.commit('user/register', { username, token: 'sxgWKnLADfS8hUxbiMWyb' })
+        username && store.commit('base', { username })
       }
     }
   };

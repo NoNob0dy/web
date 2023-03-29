@@ -1,11 +1,11 @@
 import Vue from "vue"
 import App from "./App.vue"
-import Router from "./router"
+import router from "./router"
 import * as echarts from 'echarts'
 import EChartsOption from "./echarts"
 
 const app = new Vue({
-  router: Router,
+  router,
   render: h => h(App),
   mounted() {
     this.$nextTick(() => {

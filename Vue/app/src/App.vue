@@ -2,20 +2,20 @@
   <div id="app">
     <Store />
     <Router />
-    <Chart />
+    <ECharts />
   </div>
 </template>
 
 <script>
-  import StoreComponent from "./components/StoreComponent.vue"
-  import RouterComponent from "./components/RouterComponent.vue"
-  import EchartsComponent from "./components/EchartsComponent.vue"
+  import Store from "./components/StoreComponent.vue"
+  import Router from "./components/RouterComponent.vue"
+  import ECharts from "./components/EChartsComponent.vue"
   export default {
     name: "App",
     components: {
-      Store: StoreComponent,
-      Router: RouterComponent,
-      Chart: EchartsComponent
+      Store,
+      Router,
+      ECharts,
     }
 
   };

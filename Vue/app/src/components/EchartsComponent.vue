@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "EchartsComponent",
+        name: "EChartsComponent",
         data() {
             return {
                 chart: {

@@ -1,6 +1,9 @@
+
+
 #### Vue
 
 ```html
+<!--index.html-->
 <div id="app">
     <div @click="changeStr(); setStr();">
         {{ str | strFilter }}
@@ -133,21 +136,47 @@
 
 #### Router
 
-```js
-/*main.js*/
-import Vue from "vue";
-import App from "./App.vue";
-import Router from "./router";
+```vue
+<!--RouterComponent.vue-->
+<template>
+    <div id="router">
+        <router-link to="/">Go to Home</router-link>
+        <router-link to="/award">Go to Award</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+  
+<script>
+    export default {
+        name: "RouterComponent"
+    }
+</script>
+  
+<style></style>
+```
 
-const app = new Vue({ 
-  router: Router,
-  render: h => h(App) 
-});
-app.$mount("#app");
+```VUE
+<!--App.vue-->
+<template>
+	<div id="app"></div>
+    <Router />
+</template>
+
+<script>
+import Router from "./components/RouterComponent.vue"
+    export default {
+        name: "App",
+    };
+    components: {
+      Router
+    }
+</script>
+
+<style></style>
 ```
 
 ```js
-/*router/index.js*/
+/*./router/index.js*/
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../components/HomeComponent.vue'
@@ -178,51 +207,23 @@ const Router = new VueRouter({
 export default Router
 ```
 
-```vue
-<!--App.vue-->
-<template>
-	<div id="app">
-		<h1>Hello App!</h1>
-        <p>
-			<router-link to="/">Go to Home</router-link>
-			<router-link to="/award">Go to Award</router-link>
-        </p>
-		<router-view></router-view>
-	</div>
-</template>
+```js
+/*main.js*/
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
 
-<script>
-    export default {
-        name: "App",
-    };
-</script>
-
-<style></style>
+const app = new Vue({ 
+  router,
+  render: h => h(App) 
+});
+app.$mount("#app");
 ```
 
 #### Vuex
 
 ```js
-/*store/index.js*/
-import Vue from 'vue'
-import Vuex from 'vuex'
-import BaseModule from './BaseModule'
-import UserModule from './UserModule'
-
-Vue.use(Vuex);
-
-const Store = new Vuex.Store({
-    modules: {
-        base: BaseModule,
-        user: UserModule,
-    },
-})
-
-export default Store;
-```
-
-```js
-/*store/BaseModule.js*/
+/*./store/BaseModule.js*/
 const BaseModule = {
     state: () => ({
         welcome: 'welcome'
@@ -244,7 +245,7 @@ export default BaseModule
 ```
 
 ```js
-/*store/UserModule*/
+/*./store/UserModule*/
 const UserModule = {
     namespaced: true,
     state: () => ({
@@ -270,44 +271,86 @@ const UserModule = {
 export default UserModule
 ```
 
+```js
+/*./store/index.js*/
+import Vue from 'vue'
+import Vuex from 'vuex'
+import BaseModule from './BaseModule'
+import UserModule from './UserModule'
+
+Vue.use(Vuex);
+
+const Store = new Vuex.Store({
+    modules: {
+        base: BaseModule,
+        user: UserModule,
+    },
+})
+
+export default Store;
+```
+
 ```vue
+<!--StoreComponent.vue-->
 <template>
-	<div id="app">
-		<h1>{{ welcome }}</h1>
-		<input v-if="token == null" type="button" 			
-               @click="btn('den21s')" value="register" />
-	</div>
+    <div id="store">
+      <h1>{{ welcome }}</h1>
+      <input v-if="token == null" type="button" 
+             @click="btn('den21s')" value="register" />
+    </div>
+</template>
+  
+<script>
+  import store from "../store"
+  export default {
+    name: "StoreComponent",
+    store,
+    data() {
+      return {}
+    },
+    computed: {
+      welcome() {
+        return store.getters.welcome
+      },
+      username() {
+        return store.getters["user/username"]
+      },
+      token() {
+        return store.getters["user/token"]
+      }
+    },
+    methods: {
+      btn(username) {
+        console.log(username);
+        username && store.commit('user/register', { 
+            username, 
+            token: 'sxgWKnLADfS8hUxbiMWyb' 
+        })
+        username && store.commit('base', { username })
+      }
+    }
+  };
+</script>
+  
+<style></style>
+```
+
+```vue
+<!--App.vue-->
+<template>
+  <div id="app">
+    <Store />
+  </div>
 </template>
 
 <script>
-	import Store from "./store"
-    export default {
-		name: "App",
-        store: Store,
-        data() {
-        	return {}
-        },
-        computed: {
-            welcome() {
-            	return Store.getters.welcome
-            },
-            username() {
-                return Store.getters["user/username"]
-            },
-            token() {
-                return Store.getters["user/token"]
-            }
-        },
-        methods: {
-        	btn(username) {
-                username && Store.commit('user/register', { 
-                    username, 
-                    token: 'success' 
-                })
-                username && Store.commit('base', { username })
-            }
-        }
-    };
+  import Store from "./components/StoreComponent.vue"
+  export default {
+    name: "App",
+    components: {
+      Store,
+    }
+  };
 </script>
 
 <style></style>
