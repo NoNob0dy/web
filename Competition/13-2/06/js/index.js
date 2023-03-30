@@ -1,78 +1,84 @@
 $(function () {
   getData();
-  let rl = [], ll = $("#leftSelect option").map(item => $(item));
-  console.log(ll);
   $("#add").click(function () {
-    let change = [];
+    let change = [], ll = getOptions("left");
     for (let i = 0; i < ll.length; i++) {
-      if (ll[i].attr("selected")) {
-        ll[i].attr("selected", false);
-        $('#rightSelect').append(ll[i]);
+      if (ll[i].is(":checked")) {
+        ll[i].attr("checked", false);
+        $('#rightSelect').append(createOption(ll[i]));
         ll[i].remove();
-        
-        rl.push(ll[i]);
         change.push(ll[i]);
-        ll.splice(i, 1);
       }
     }
     changeAccess(true, change);
   });
   $("#addAll").click(function () {
-    let change = [];
+    let change = [], ll = getOptions("left");
     for (let i = 0; i < ll.length; i++) {
-
-      $('#rightSelect').append(ll[i]);
+      $('#rightSelect').append(createOption(ll[i]));
       ll[i].remove();
-
-      rl.push(ll[i]);
       change.push(ll[i]);
-      ll.splice(i, 1);
     }
     changeAccess(true, change);
   });
   $("#remove").click(function () {
-    let change = [];
+    let change = [], rl = getOptions("right");
     for (let i = 0; i < rl.length; i++) {
-      if (rl[i].attr("selected")) {
-
-        rl[i].attr("selected", false);
-        $('#leftSelect').append(rl[i]);
+      if (rl[i].is(":checked")) {
+        rl[i].attr("checked", false);
+        $('#leftSelect').append(createOption(rl[i]));
         rl[i].remove();
-
-        ll.push(rl[i]);
         change.push(rl[i]);
-        rl.splice(i, 1);
       }
     }
     changeAccess(false, change);
   });
   $("#removeAll").click(function () {
-    let change = [];
+    let change = [], rl = getOptions("right");
     for (let i = 0; i < rl.length; i++) {
-
-      $('#leftSelect').append(rl[i]);
+      $('#leftSelect').append(createOption(rl[i]));
       rl[i].remove();
-
-      ll.push(rl[i]);
-      change.push(ll[i]);
-      rl.splice(i, 1);
+      change.push(rl[i]);
     }
     changeAccess(false, change);
   });
 });
 
+function createOption(node) {
+  let option = $("<option>");
+  option.text(node.text());
+  option.attr("value", node.attr("value"));
+  return option;
+}
+
+function getOptions(dir) {
+  let options = [];
+  $(`#${dir}Select option`).each((index, elem) => {
+    options.push($(elem));
+  });
+  return options;
+}
+
+function getTd(seriel) {
+  let tds = [];
+  $(`#userList td:${seriel}`).each((index, elem) => {
+    tds.push($(elem));
+  });
+  return tds;
+}
 /**
  * 修改权限
  * @param {Object} right 要修改的权限
  * @param {Object} changeList 要修改权限的用户列表
  */
 function changeAccess(right, changeList) {
-  const names = $("#userList td:even").map((item) => $(item)),
-        rights = $("#userList td:odd").map((item) => $(item));  
+  const names = getTd("even"),
+        rights = getTd("odd");
   for (let i = 1, cnt = 0; cnt < changeList.length; i++) {
-    const val = changeList[cnt++].value;
+    const val = changeList[cnt++].attr("value");
     if (names[i].text() == val) {
       if (right) {
+        console.log(1);
         rights[i].text("管理员");
       } else {
         rights[i].text("普通用户");
