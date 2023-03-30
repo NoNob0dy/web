@@ -95,20 +95,20 @@ app.$mount("#app");
   <template>
       <div id="form">
           <el-form>
-              <el-form-items>
+              <el-form-item>
                   <el-input v-model="name" />
                   <el-input v-model="psd" show-password />
                   <el-date-picker v-model="date" 
                                   type="date" />
-              </el-form-items>
-              <el-form-items>
+              </el-form-item>
+              <el-form-item>
                   <el-select v-model="select">
                       <el-option label="1" value="dennis">
                           dennis
-      				</el-option>
+                      </el-option>
                       <el-option label="2" value="den21s">
                           den21s
-      				</el-option>
+                      </el-option>
                   </el-select>
                   <el-radio-group v-model="radio">
                       <el-radio label="1" value="dennis">
@@ -119,40 +119,40 @@ app.$mount("#app");
                   <el-checkbox-group v-model="checkbox">
                       <el-checkbox label="1" value="dennis">
                           dennis
-      				</el-checkbox>
+                      </el-checkbox>
                       <el-checkbox label="2" value="den21s">
                           den21s
-     					</el-checkbox>
+                      </el-checkbox>
                   </el-checkbox-group>
-              </el-form-items>
-              <el-form-items>
-                  <el-upload action="http://localhost:8080/" 
-                             accept=".png, .jpg">
+              </el-form-item>
+              <el-form-item>
+                  <el-upload action="http://localhost:8080/" 							  accept=".png, .jpg">
                       <i class="el-icon-plus"></i>
                   </el-upload>
-                  <el-switch v-model="ifSwitch"/>
-  				<el-button type="primary" @click="">
-      				submit
-      			</el-button>            
-      		</el-form-items>
+                  <el-switch v-model="ifSwitch" />
+                  <el-button type="primary" @click="">
+                      submit
+      			</el-button>
+              </el-form-item>
           </el-form>
       </div>
   </template>
     
   <script>
-  export default {
-      name: "FormComponent",
-      data() {
-          return {
-              psd: '',
-              name: '',
-              radio: [],
-              select: [],
-              checkbox: [],
-              ifSwitch: false,
+      export default {
+          name: "FormComponent",
+          data() {
+              return {
+                  psd: '',
+                  name: '',
+                  date: '',
+                  radio: [],
+                  select: [],
+                  checkbox: [],
+                  ifSwitch: false,
+              }
           }
       }
-  }
   </script>
   
   <style></style>
@@ -163,10 +163,8 @@ app.$mount("#app");
   ```vue
   <template>
       <el-table :data="tableData.filter(searchFilter)">
-          <el-table-column prop="id" label="Id">
-      	</el-table-column>
-          <el-table-column prop="content" label="Content">
-      	</el-table-column>
+          <el-table-column prop="id" label="Id" />
+          <el-table-column prop="content" label="Content" />
           <el-table-column>
               <template #header>
                   <el-input v-model="search" size="mini" />
@@ -186,7 +184,7 @@ app.$mount("#app");
   </template>
     
   <script>
-      import axios from 'axios';
+      import axios from 'axios'
       export default {
           name: "TableComponent",
           data() {
@@ -196,22 +194,26 @@ app.$mount("#app");
               }
           },
           created() {
-              axios.get('.json').then(res => {
-                  for (key in res) {
-                      this.tableData.push(res[key]);
+              axios.get('./data.json').then(res => {
+                  for (let i = 0; i < res.length; i++) {
+                      this.tableData.push(res[i]);
                   }
               })
           },
           methods: {
               searchFilter(data) {
                   const org = data.name.toLowerCase(),
-                        src = search.toLowerCase();
-                  if (!search) {
+                        src = this.search.toLowerCase();
+                  if (!this.search) {
   					return org.includes(src);
                   }
               },
-              handleEdit(index) {},
-              handleDelete(index) {},
+              handleEdit(index) {
+                  console.log(index);
+              },
+              handleDelete(index) {
+                  console.log(index);
+              },
           },
       }
   </script>
