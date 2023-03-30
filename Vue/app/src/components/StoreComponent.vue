@@ -1,8 +1,8 @@
 <template>
-    <div id="store">
-      <h1>{{ welcome }}</h1>
-      <input v-if="token == null" type="button" @click="btn('den21s')" value="register" />
-    </div>
+  <div id="store">
+    <h1>{{ welcome }}</h1>
+    <input v-if="token == null" type="button" @click="btn('den21s')" value="register" />
+  </div>
 </template>
   
 <script>

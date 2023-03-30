@@ -13,7 +13,11 @@
             return {
                 chart: {
                     width: "999px",
-                    height: "999px"
+                    height: "520px",
+                    maxHeight: "1000px"
+                    /*I don't know why we need to 
+                    set the 'max-height' attribute, 
+                    which could erase system's warning*/
                 }
             }
         }

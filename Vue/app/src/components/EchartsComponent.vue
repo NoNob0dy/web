@@ -8,8 +8,9 @@
         data() {
             return {
                 chart: {
-                    width: "999px",
-                    height: "999px"
+                    width: "520px",
+                    height: "520px",
+                    maxHeight: "1000px"
                 }
             }
         }
