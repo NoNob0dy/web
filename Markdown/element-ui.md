@@ -170,12 +170,12 @@ app.$mount("#app");
                   <el-input v-model="search" size="mini" />
               </template>
               <template #default="scope">
-                  <el-button size="mini" 
+                  <el-button size="mini" 	
   			@click="handleEdit(scope.$index, scope.row)">
                       Edit
                   </el-button>
                   <el-button size="mini" type="danger" 
-  			@click="handleDelete(scope.$index, scope.row)">
+              @click="handleDelete(scope.$index, scope.row)">
                       Delete
                   </el-button>
               </template>
@@ -195,17 +195,21 @@ app.$mount("#app");
           },
           created() {
               axios.get('./data.json').then(res => {
-                  for (let i = 0; i < res.length; i++) {
-                      this.tableData.push(res[i]);
+                  for (let i = 0; i < res.data.length; i++) {
+                      this.tableData.push(res.data[i]);
                   }
               })
           },
           methods: {
-              searchFilter(data) {
-                  const org = data.name.toLowerCase(),
-                        src = this.search.toLowerCase();
-                  if (!this.search) {
-  					return org.includes(src);
+              searchFilter(TD) {
+                  if (this.search != '') {
+                      let id = TD.id;
+                      let src = this.search.toLowerCase();
+                      let content = TD.content.toLowerCase();
+                      let ifIncludes = content.includes(src);
+                      return id == src || ifIncludes;    
+                  } else {
+                      return data
                   }
               },
               handleEdit(index) {
