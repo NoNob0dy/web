@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
-var path =require('path');
+var path = require('path');
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
