@@ -1,0 +1,19 @@
+{
+  "name": "ch1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=dev nodemon ./bin/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
