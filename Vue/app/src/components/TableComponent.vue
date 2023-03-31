@@ -7,12 +7,10 @@
                 <el-input v-model="search" size="mini" />
             </template>
             <template #default="scope">
-                <el-button size="mini" 
-			@click="handleEdit(scope.$index, scope.row)">
+                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">
                     Edit
                 </el-button>
-                <el-button size="mini" type="danger" 
-			@click="handleDelete(scope.$index, scope.row)">
+                <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">
                     Delete
                 </el-button>
             </template>
@@ -32,17 +30,20 @@
         },
         created() {
             axios.get('./data.json').then(res => {
-                for (let i = 0; i < res.length; i++) {
-                    this.tableData.push(res[i]);
+                for (let i = 0; i < res.data.length; i++) {
+                    this.tableData.push(res.data[i]);
                 }
             })
         },
         methods: {
             searchFilter(data) {
-                const org = data.name.toLowerCase(),
-                      src = this.search.toLowerCase();
-                if (!this.search) {
-					return org.includes(src);
+                if (this.search != '') {
+                    let id = data["id"],
+                        src = this.search.toLowerCase(),
+                        content = data["content"].toLowerCase()
+                    return id == src || content.includes(src);
+                } else {
+                    return data
                 }
             },
             handleEdit(index) {
