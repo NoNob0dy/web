@@ -1,48 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    <style>
-        .nationOne { 
-            width: 100px;
-            height: 100px;
-        }
-        .nationTwo {
-            width: 200px;
-            height: 200px;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="app">
-        <div :class="[
-                 	'nationOne', 
-                 	'nationTwo'
-                 ]" :style="{ backgroundColor: 'green' }"></div>
-        <div :class="{
-                 	'nationOne': ifBind[0], 
-                 	'nationTwo': ifBind[1], 
-                 }" :style="{ backgroundColor: 'red' }"></div>
-    </div>
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data() {
-                return {
-                    ifBind: [true, false]
-                }
+function convertToTree(regions, rootId = "0") {
+    // TODO: 在这里写入具体的实现逻辑
+    // 将平铺的结构转化为树状结构，并将 rootId 下的所有子节点数组返回
+    // 如果不存在 rootId 下的子节点，则返回一个空数组
+    let obj = [];
+    while (regions.length != 0) {
+      let region = regions.shift(); 
+      if (region.pid == "0") {
+        obj.push({...region, children: []});
+      } else {   
+        for (let node = obj; node != []; node = node.children) {
+          let flag = false;
+          console.log();
+          for (let i = 0; i < node.length; i++) {
+            console.log(node[i]);
+            if (node[i].id == region.pid) {
+              node[i].children.push({...region, children: []});
+              console.log(node[i]);
+              flag = true;
             }
-        });
-    </script>
-</body>
-
-</html>
+          }
+          if (flag) {
+            break;
+          }
+        }
+      }
+    }
+    console.log(obj);
+    /*return obj.map((v, k) => {
+      return v.id == rootId;
+    })*/
+  
+  }
+  
+  function ifFather(regions, pid) {
+    
+    return false;
+  }
+  
+  module.exports = convertToTree; // 检测需要，请勿删除
+  
