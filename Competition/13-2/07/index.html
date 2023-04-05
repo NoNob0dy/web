@@ -1,92 +1,197 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>一起会议吧</title>
-    <link rel="stylesheet" type="text/css" href="./css/index.css" />
-    <link rel="stylesheet" href="./css/iconfont/iconfont.css" />
-  </head>
-  <body>
-    <div id="app">
-      <!-- TODO：请在下面实现需求 -->
-      <!-- 登录/注销窗口 -->
-      <div class="login">
-        <div class="left-tools">
-          <a class="close-btn"></a>
-          <a class="shrink-btn"></a>
-        </div>
-        <h3>登录</h3>
-        <p>
-          选择用户：<select id="selectUser">
-            <option value="1">Tom</option>
-          </select>
-        </p>
-        <p>当前用户为：Tom</p>
 
-        <a class="login-btn">登录</a>
+<head>
+  <meta charset="utf-8" />
+  <title>一起会议吧</title>
+  <link rel="stylesheet" type="text/css" href="./css/index.css" />
+  <link rel="stylesheet" href="./css/iconfont/iconfont.css" />
+</head>
+
+<body>
+  <div id="app">
+    <!-- TODO：请在下面实现需求 -->
+    <!-- 登录/注销窗口 -->
+    <div class="login">
+      <div class="left-tools">
+        <a class="close-btn"></a>
+        <a class="shrink-btn"></a>
       </div>
+      <h3>{{state}}</h3>
+      <p>
+        选择用户：<select id="selectUser" v-model="select">
+          <option v-for="item in list" :value="item.id">{{item.name}}</option>
+        </select>
+      </p>
+      <p>当前用户为：{{currentUser}}</p>
 
-      <!-- 右侧显示用户列表窗口按钮 -->
-      <button id="show" class="right-btn">
-        <span class="iconfont icon-left-arrow"></span>
-      </button>
-
-      <!-- 用户列表窗口 -->
-      <div class="user-dialog">
-        <!-- 用户列表窗口上侧工具栏 -->
-        <ul class="tools">
-          <li class="tools-left">
-            <button>
-              <span class="iconfont icon-close"></span>
-            </button>
-            <button>
-              <span class="iconfont icon-dialog"></span>
-            </button>
-            <button class="active">
-              <span class="iconfont icon-list"></span>
-            </button>
-          </li>
-          <li class="tools-right">
-            <button class="show-list">
-              <span class="iconfont icon-retract"></span>
-            </button>
-          </li>
-        </ul>
-
-        <!-- 用户列表 -->
-        <ul class="say-list">
-          <li>
-            <span class="iconfont icon-microphone"></span>
-          </li>
-          <li class="line"></li>
-          <li>正在讲话：Tom；</li>
-        </ul>
-        <ul class="user-list">
-          <li>
-            <img class="header" src="./images/header1.png" />
-            <div class="user-name">
-              <span class="iconfont icon-user header-icon"></span>
-              <span class="iconfont icon-microphone"></span>
-              Tom
-            </div>
-          </li>
-          <li>
-            <img class="header" src="./images/header2.png" />
-            <div class="user-name">
-              <span class="iconfont icon-microphone"></span>
-              Lily
-            </div>
-          </li>
-        </ul>
-      </div>
+      <a class="login-btn" @click="login">{{state}}</a>
     </div>
-    <script type="text/javascript" src="./js/vue.js"></script>
-    <script type="text/javascript" src="./js/axios.min.js"></script>
-    <script type="text/javascript">
-      // TODO：请在下面实现需求
-      new Vue({
-        el: "#app",
-      });
-    </script>
-  </body>
+
+    <!-- 右侧显示用户列表窗口按钮 -->
+    <button id="show" class="right-btn" v-if="hide" @click="hide = !hide">
+      <span class="iconfont icon-left-arrow"></span>
+    </button>
+
+    <!-- 用户列表窗口 -->
+    <div class="user-dialog" v-else-if="state == '注销'">
+      <!-- 用户列表窗口上侧工具栏 -->
+      <ul class="tools">
+        <li class="tools-left">
+          <button v-for="item, key in classList">
+            <span :id="key" :class="[item, {'active': isActive[key]}]" @click="active(key)"></span>
+          </button>
+        </li>
+        <li class="tools-right">
+          <button class="show-list" @click="hide = !hide">
+            <span class="iconfont icon-retract"></span>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 用户列表 -->
+      <ul class="say-list">
+        <li>
+          <span class="iconfont icon-microphone"></span>
+        </li>
+        <li class="line"></li>
+        <li>正在讲话：{{currentUser}}；</li>
+      </ul>
+      <ul class="user-list">
+        <li v-for="item in newList" v-show="defaultList(item.name)" :id="item.name">
+          <img class="header" :src="item.imgPath" />
+          <div class="user-name">
+            <span class="iconfont icon-user header-icon" v-if="item.isHost"></span>
+            <span class="iconfont icon-microphone"></span>
+            {{item.name}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script type="text/javascript" src="./js/vue.js"></script>
+  <script type="text/javascript" src="./js/axios.min.js"></script>
+  <script type="text/javascript">
+    // TODO：请在下面实现需求
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          list: [],
+          select: "",
+          update: "",
+          state: "登录",
+          hide: false,
+          isActive: [false, true, false],
+          classList: [
+            "iconfont icon-close",
+            "iconfont icon-dialog",
+            "iconfont icon-list"
+          ],
+          currentListNode: {}
+        }
+      },
+      computed: {
+        currentUser() {
+          for (key in this.list) {
+            /*this.update == this.select, but this.update's  
+            val is changed after clicking the login button*/
+            if (this.list[key].id == this.update) {
+              return this.list[key].name
+            }
+          }
+        },
+        newList() {
+          let newList = [];
+          for (key in this.list) {
+            if (this.list[key].id == this.select) {
+              newList.push(this.list[key]);
+            }
+          }
+          for (key in this.list) {
+            if (this.list[key].id != this.select) {
+              newList.push(this.list[key]);
+            }
+          }
+          return newList;
+        }
+      },
+      mounted() {
+        axios.get("./js/userList.json").then(res => {
+          for (key in res.data) {
+            this.list.push(res.data[key]);
+          }
+        })
+      },
+      methods: {
+        login() {
+          if (this.select == "") {
+            return
+          }
+          this.update = this.select;
+          const selectUser = document.getElementById("selectUser");
+          if (this.state == "登录") {
+            this.state = "注销"
+            selectUser.parentNode.style.display = "none";
+          } else {
+            this.state = "登录"
+            this.select = this.update;
+            this.update = "";
+            selectUser.parentNode.style.display = "";
+          }
+        },
+        defaultList(name) {
+          console.log();
+          if (this.state == "登录") {
+            return false;
+          } else {
+            if (this.currentUser != name) {
+              return false
+            } else {
+              return true
+            }
+          }
+        },
+        active(key) {
+          let icon;
+          for (let i = 0; i < this.isActive.length; i++) {
+            if (i == key) {
+              icon = document.getElementById(i);
+              icon.classList = this.classList[i] + " active"
+            } else {
+              icon = document.getElementById(i);
+              icon.classList = this.classList[i];
+            }
+          }
+          this.display(key);
+        },
+        display(key) {
+          let list = document.querySelectorAll(".user-list li");
+          switch (key) {
+            case 0:
+              list.forEach((val) => {
+                val.style.display = "none";
+              })
+              break;
+            case 1:
+              list.forEach((val) => {
+                if (val.getAttribute("id") == this.currentUser) {
+                  val.style.display = "";
+                } else {
+                  val.style.display = "none";
+                }
+              })
+              break;
+            case 2:
+              list.forEach((val) => {
+                val.style.display = "";
+              })
+              break;
+          }
+        }
+      }
+    });
+  </script>
+</body>
+
 </html>
