@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>绝美宋词</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="./js/vue.min.js"></script>
+  <script src="./js/axios.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1 style="text-align: center">输入关键字，找一首词</h1>
+    <div class="search-form">
+      <input type="text" id="search" class="search" v-model="search" placeholder="词牌名 词句 词人" />
+      <ul class="suggestions">
+        <li v-for="item, index in newData">
+          <span class="poet" v-html="item.poetry_content"></span>
+          <span class="title" v-html="Title_Author(item)"></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        data: [],
+        newData: [],
+        search: ""
+      },
+      created() {
+        axios.get("./data.json").then((res) => {
+          for (key in res.data) {
+            this.data.push(res.data[key]);
+          }
+        })
+      },
+      watch: {
+        search(val) {
+          this.newData = [];
+          if (val == "") {
+            return
+          }
+          for (key in this.data) {
+            let flag = false;
+            let tmp = {
+              "poetry_content": "",
+              "title": "",
+              "author": ""
+            }
+            for (item in this.data[key]) {
+              tmp[item] = this.data[key][item]
+              if (tmp[item].includes(val)) {
+                tmp[item] = tmp[item].replaceAll(
+                  val,
+                  `<span class="highlight">${val}</span>`
+                );
+                flag = true;
+              }
+            }
+            if (flag) {
+              this.newData.push(tmp);
+              Vue.set(this.newData, tmp);
+            }
+          }
+        }
+      },
+      methods: {
+        Title_Author(item) {
+          return item.title + '-' + item.author;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

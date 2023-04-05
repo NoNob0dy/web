@@ -15,7 +15,7 @@
 			<h1>心愿便利贴</h1>
 			<div class="container">
 				<!-- TODO 待修改的代码 -->
-				<div class="card" :class="item.css" v-for="(item,index) in []" :key="index">
+				<div class="card" :class="item.css" v-for="item, index in wishList" :key="index">
 					<div class="header">
 						<img class="close" @click="closeCard(index)" src="./images/ding.png" alt="close">
 					</div>
@@ -93,8 +93,16 @@
 					pic: ''
 				},
 				rules: {
-					// TODO 待补充验证的代码
-					 
+					name: {
+						required: true,
+						min: 2,
+						max: 4
+					},
+					content: {
+						required: true,
+						min: 1,
+						max: 30
+					}	 
 				},
 				num:1,
 				picList: [],
