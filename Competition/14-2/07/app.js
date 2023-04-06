@@ -2,6 +2,7 @@
 var app = require("http");
 app.createServer((req, res) => {
     res.setHeader("Content-type", "text/html;charset=utf8");
+    req.path
     if (req.url == "/news") {
         res.end(JSON.stringify([
             {

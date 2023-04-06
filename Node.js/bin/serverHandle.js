@@ -1,7 +1,7 @@
 const reqRouters = require("./reqRouters");
 const serverHandle = (req, res) => {
   res.setHeader("Content-Type", "application/json");
-  req.path = req.url.split("?")[0];
+  //req.path = req.url.split("?")[0];
   const result = reqRouters(req, res);
   if (result) {
     res.write(result);

@@ -1,11 +1,11 @@
 const reqRouters = (req, res) => {
-    if (req.path === "/") {
+    if (req.url === "/") {
       return "index";
     }
-    if (req.path === "/list") {
+    if (req.url === "/list") {
       return "list";
     }
-    if (req.path === "/add") {
+    if (req.url === "/add") {
       return "add";
     }
   };
