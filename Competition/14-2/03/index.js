@@ -38,5 +38,20 @@ function mPrompt() {
         </div>
     `;
   const div = document.createElement("div");
+  const body = document.querySelector("body");
+  div.innerHTML = template;
+  body.appendChild(div);
+  return new Promise((resolve, reject) => {
+    const input = document.querySelector("input");
+    document.getElementById("confirm").addEventListener("click", () => {
+      body.removeChild(div);
+      resolve(input.value);
+    });
+    document.getElementById("cancel").addEventListener("click", () => {
+      body.removeChild(div);
+      reject(false);
+    });
+  })
+  
   // TODO：待补充代码
 }

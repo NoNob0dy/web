@@ -181,7 +181,13 @@
         },
         //TODO 点击文字后，在idiom从左到右第一个空的位置加上改文字
         getSingleWord(val) {
-          
+          for (key in this.idiom) {
+            if(this.idiom[key] == "") {
+              this.idiom[key] = val;
+              this.$set(this.idiom, key, val);
+              return;
+            }
+          }
         },
         clear(i) {
           this.idiom[i] = ""
@@ -194,7 +200,18 @@
         // 例2：tip=‘形容非常感激或高兴’，idiom=["泪","眼","盈","眶"]，则result返回false
         // 例3：tip=‘在繁忙中抽出空闲来’，idiom=["忙","里","偷","闲"]，则result返回true
         confirm() {
-
+          for (key in this.arr) {
+            let t = Array();
+            if (this.arr[key].tip == this.tip) {
+              let word = this.idiom.join("");
+              if (this.arr[key].word == word) {
+                this.result = true
+              } else {
+                this.result = false;
+                return;
+              }
+            } 
+          }
         }
       }
     })

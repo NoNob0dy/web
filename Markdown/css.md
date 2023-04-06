@@ -3,7 +3,6 @@
 ```css
 E {
 	display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -26,9 +25,9 @@ div {
     animation: scaling 2s ease-in infinite
     transition: transform 1.5s ease-in-out
     /*
-        It wasn't a mistake, normally we need 'transition'
-        in both original state and hover state,
-        so that we could make the transition smoothly
+        Normally we need 'transition' in both 
+        original state and hover state, so that
+        we could make the transition smoothly
     */
 }
 
@@ -50,6 +49,7 @@ div:hover {
     75% {
         width: 100px
     }
+    
     100% {
         width: 200px
     }

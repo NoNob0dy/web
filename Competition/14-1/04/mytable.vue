@@ -10,8 +10,9 @@
     >
       <el-table-column label="单选" width="80">
         <!-- TODO：完善单选按钮组件，实现需求（DOM 结构不能修改） -->
-        <template>
-          <el-radio v-model="currentRow">&nbsp;</el-radio>
+        <template slot-scope="scope">
+          <el-radio v-model="currentRow" :label="scope.row"
+                    @click="() => {currentRow = scope.row}" >&nbsp;</el-radio>
         </template>
       </el-table-column>
       <el-table-column label="日期" width="180">

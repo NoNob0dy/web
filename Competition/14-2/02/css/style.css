@@ -79,10 +79,22 @@ body {
   border-radius: 100px;
   white-space: nowrap;
 }
-
 /*  level 位置 */
 .level {
   top: 15% !important;
 }
-
 /* TODO 待补充代码 */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-card {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar {
+  align-self: center;
+}

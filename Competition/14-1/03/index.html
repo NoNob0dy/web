@@ -56,7 +56,18 @@
     </div>
     <script>
       $("#card li").on("click", function (e) {
-        // TODO: 待补充代码
+        if ($("#box li").length >= 7) {
+          return;
+        }
+        const origin = $(this);
+        const card = origin.clone();
+        $("#box").append(card);
+        const lis = $(`#box li[data-id = ${card.attr("data-id")}]`);
+        origin.addClass("active");
+        const length = lis.length;
+        if (length == 3) {
+          lis.remove();
+        }
       });
     </script>
   </body>

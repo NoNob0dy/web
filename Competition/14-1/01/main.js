@@ -4,8 +4,7 @@
  * @return {*} 返回数据类型
  */
 function getType(data) {
-  // TODO：待补充代码
-
+  return Object.prototype.toString.apply(data).slice(8, -1);
 }
 
 module.exports = {
