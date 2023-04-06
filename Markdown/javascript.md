@@ -13,7 +13,7 @@ sessionStorage.ShopNumber = "2"
 #### DOM
 
 ```js
-/*remember to place this script right down below <body> tag,     
+/*remember to place this script right down below <body> tag,   
 then DOM elements in <body> will be rendered and readable*/
 var node = document.createElement("div"),
     text = document.createTextNode("I'm div"),
@@ -30,7 +30,7 @@ node.onclick = () => {
 parent.appendChild(node);
 ```
 
-#### Reg-Exp
+#### RegExp
 
 ```js
 const reg = new RegExp(//);
@@ -48,7 +48,13 @@ const keys = Object.keys(object);
 //	  keys = Object.getOwnPropertyNames(object);
 for (key in keys) { /*object[key]*/ }     
 
-let obj;
+let obj = {
+    "juice": 999, 
+    "wrld": "forever"
+};
+/*thus you will get the object 'copy' 
+that don't refer to the object 'obj'*/
+let copy = { ...obj }
 //set
 obj = new Set([0]);
 obj.add(999);

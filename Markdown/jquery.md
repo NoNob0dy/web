@@ -36,7 +36,8 @@ function animation() {
     //animate didn't support transform attriubte
 }
 //using recursive function to make animation infinite
-//iteration
+/*iteration, be aware of that the 
+ first param is index instead of elem*/ 
 $('E').each((index, elem) => {})
 ```
 
