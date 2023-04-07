@@ -1,27 +1,71 @@
+const { json } = require('express');
 var express = require('express');
-var users = express();
+var app = express();
 var fs = require("fs");
-var path = require('path');
-users.use(express.json())
-users.use(express.urlencoded({ extended: false }))
+var filePath = __dirname + "/users.json";
 
-users.post('/add', (req, res) => {
-    fs.readFile(path.resolve(__dirname,'./users.json'), 'utf8', (err, data) => {
+app.get('/listUsers', (req, res) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        res.end(data);
+    });
+})
+
+app.get('/addUser', (req, res) => {
+    var newUser = {
+        "id": "4",
+        "username": "madongmei",
+        "password": "123"
+    }
+    fs.readFile(filePath, 'utf8', (err, data) => {
         data = JSON.parse(data);
-        data["userlist"].push({
-            "id": 4,
-            "username": "lucy",
-            "password": "123456"
+        data["userlist"].push(newUser);
+        data = JSON.stringify(data, "", "\t");
+        fs.writeFile(filePath, data, 'utf8', (err) => {
+            if (!err) {
+                res.end(data);
+            } else {
+                res.end(err);
+            }
         });
-        res.json(data);
     });
 })
 
-users.get('/list', (req, res) => {
-    fs.readFile(path.resolve(__dirname,'./users.json'), 'utf8', (err, data) => { 
+app.get('/deleteUser', (req, res) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
         data = JSON.parse(data);
-        res.json(data);
+        for (key in data["userlist"]) {
+            if (data["userlist"][key]["id"] == "4") {
+                data["userlist"].splice(key, 1);
+                break;
+            }
+        }
+        data = JSON.stringify(data, "", "\t");
+        fs.writeFile(filePath, data, 'utf8', (err) => {
+            if (!err) {
+                res.end(data);
+            } else {
+                res.end(err);
+            }
+        });
     });
 })
 
-module.exports = users;
+app.get('/:id', (req, res) => {
+    var user = {};
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        data = JSON.parse(data);
+        for (key in data["userlist"]) {
+            if (data["userlist"][key]["id"] == req.params.id) {
+                user = data["userlist"][key];
+                break;
+            }
+        }
+        res.end(JSON.stringify(user, "", "\t"));
+    });
+})
+
+app.listen(8080, function () {
+    var host = "localhost"
+    var port = "8080"
+    console.log("listening:http://%s:%s", host, port)
+})
