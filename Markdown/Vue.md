@@ -65,13 +65,13 @@
             }
         },
         watch: {
-            str: (newVal, oldVal) => {
+            str(newVal, oldVal)  {
                 alert("I'm watching");
             }
         },
         filters: {
             //useage: str | strFilter
-            strFilter: (val) => {
+            strFilter(val) {
                 return val.toLowerCase();
             }    
         },
@@ -184,7 +184,14 @@ import Award from '../components/AwardComponent.vue'
 
 Vue.use(VueRouter)
 
-const routes = [{
+/**
+ * @description hash 兼容性好
+ * @description history 需要服务端支持
+ */
+
+export default new VueRouter({
+    mode: "history"
+    routes: [{
         path: '/',
         name: 'Home',
         component: Home
@@ -192,19 +199,8 @@ const routes = [{
 		path: '/award',
 		name: 'Award',
         component: Award,
-	}
-]
-
-/**
- * @description hash 兼容性好
- * @description history 需要服务端支持
- */
-const Router = new VueRouter({
-	mode:'history',
-	routes
+	}]
 })
-
-export default Router
 ```
 
 ```js
@@ -214,10 +210,11 @@ import App from "./App.vue";
 import router from "./router";
 
 const app = new Vue({ 
-  router,
-  render: h => h(App) 
+  	//el: "#app"
+    router,
+  	render: h => h(App) 
 });
-app.$mount("#app");
+app.$mount("#app"); 
 ```
 
 #### Vuex

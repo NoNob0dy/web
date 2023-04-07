@@ -9,10 +9,10 @@ import "element-ui/lib/theme-chalk/index.css"
 Vue.use(ElementUI);
 
 const app = new Vue({
+    el: "#app"
   	render: h => h(App),
   }
 });
-app.$mount("#app");
 ```
 
 #### Components
@@ -126,7 +126,7 @@ app.$mount("#app");
                   </el-checkbox-group>
               </el-form-item>
               <el-form-item>
-                  <el-upload action="http://localhost:8080/" 							  accept=".png, .jpg">
+                  <el-upload action="http://localhost:8080/" 							  						     accept=".png, .jpg">
                       <i class="el-icon-plus"></i>
                   </el-upload>
                   <el-switch v-model="ifSwitch" />
@@ -212,11 +212,11 @@ app.$mount("#app");
                       return data
                   }
               },
-              handleEdit(index) {
-                  console.log(index);
+              handleEdit(index, row) {
+                  console.log(index, row);
               },
-              handleDelete(index) {
-                  console.log(index);
+              handleDelete(index, row) {
+                  console.log(index, row);
               },
           },
       }

@@ -37,7 +37,6 @@ fs.writeFile('*.txt', data, (err) => {
 #### express module
 
 ```js
-const { json } = require('express');
 var express = require('express');
 var app = express();
 var fs = require("fs");

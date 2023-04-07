@@ -46,11 +46,11 @@
                     return data
                 }
             },
-            handleEdit(index) {
-                console.log(index);
+            handleEdit(index, row) {
+                console.log(index, row);
             },
-            handleDelete(index) {
-                console.log(index);
+            handleDelete(index, row) {
+                console.log(index, row);
             },
         },
     }
