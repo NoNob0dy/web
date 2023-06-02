@@ -1,11 +1,11 @@
 <template>
-    <div>Award</div>
+   <div>Award</div>
 </template>
   
 <script>
-    export default {
-        name: "AwardComponent",
-    };
+export default {
+   name: "AwardComponent",
+};
 </script>
   
 <style scoped></style>

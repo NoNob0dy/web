@@ -282,3 +282,53 @@ axios({
 });
 ```
 
+#### my function
+
+```js
+/*calling a function, using function.myCall(context)*/
+Function.prototype.myCall = function (context = window) {
+  if (context === null || context === undefined) {
+    context = window;
+  } else {
+    context = Object(context);
+  }
+  const fn = Symbol("fn"); // 用 symbol 处理一下
+  context[fn] = this;
+  const args = [...arguments].slice(1);
+  const res = context[fn](...args);
+  delete context[fn];
+  return res;
+};
+/*custom async function*/
+function myAsync(genFn) {
+    let gen = genFn;
+    return new Promise(function (resolve, reject) {
+        function step(nextFn) {
+            let next;
+            try {
+                next = nextFn();
+            } catch (e) {
+                return reject(e);
+            }
+            if (next.done) {
+                return resolve(next.value);
+            }
+            Promise.resolve(next.value).then(
+                function (v) {
+                    step(function () {
+                        return gen.next(v);
+                    });
+                },
+                function (e) {
+                    step(function () {
+                        return gen.throw(e);
+                    });
+                }
+            );
+        }
+        step(function () {
+            return gen.next();
+        });
+    })
+}
+```

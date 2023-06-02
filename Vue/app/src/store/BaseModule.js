@@ -1,18 +1,18 @@
 const BaseModule = {
-    state: () => ({
-        welcome: 'welcome'
-    }),
-    getters: {
-        welcome(state) {
-            return state.welcome
-        },
-    },
-    mutations: {
-        base(state, { username }) {
-            state.welcome += ', ' + username;
-        },
-    },
-    actions: {}
+   state: () => ({
+      welcome: 'welcome'
+   }),
+   getters: {
+      welcome(state) {
+         return state.welcome
+      },
+   },
+   mutations: {
+      base(state, { username }) {
+         state.welcome += ', ' + username;
+      },
+   },
+   actions: {}
 }
 
 export default BaseModule
