@@ -1,10 +1,30 @@
-#### flex alignment
+#### vertical and horizontal alignment
 
 ```css
+/*flex alignment*/
 E {
 	display: flex;
     align-items: center;
     justify-content: center;
+}
+/*relative position and transform-translate*/
+F {
+	position: relative;
+}
+C {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+/*based on CSS2*/
+F {
+    display: table-cell;
+    vertical-align: middle;
+}
+C {
+    display: block;
+    margin: auto;
 }
 ```
 

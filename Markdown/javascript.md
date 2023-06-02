@@ -30,6 +30,38 @@ node.onclick = () => {
 parent.appendChild(node);
 ```
 
+#### List to Tree
+
+```javascript
+const list = [
+  { id: 1, name: "node 1", parentId: null },
+  { id: 2, name: "node 1.1", parentId: 1 },
+  { id: 3, name: "node 1.2", parentId: 1 },
+  { id: 4, name: "node 1.2.1", parentId: 3 },
+  { id: 5, name: "node 2", parentId: null },
+  { id: 6, name: "node 2.1", parentId: 5 },
+  { id: 7, name: "node 2.1.1", parentId: 6 },
+];
+
+function buildTree(list, parentId) {  
+    const tree = [];  
+    for (let i = 0; i < list.length; i++) {    
+        if (list[i].parentId === parentId) {      
+            const node = {        
+                id: list[i].id,        
+                name: list[i].name,        
+                children: buildTree(list, list[i].id)     
+            };      
+            tree.push(node);    
+        }  
+    }  
+    return tree; 
+} 
+
+const tree = buildTree(list, null); 
+console.log(tree);
+```
+
 #### RegExp
 
 ```js
