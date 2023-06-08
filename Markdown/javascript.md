@@ -62,7 +62,7 @@ const tree = buildTree(list, null);
 console.log(tree);
 ```
 
-#### RegExp
+#### Reg Expression
 
 ```js
 const reg = new RegExp(//);
