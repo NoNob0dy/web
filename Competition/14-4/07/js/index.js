@@ -28,7 +28,7 @@ function renderMore(index) {
   for (let i = 0; i < 15; i++) {
     let item = {
       icon: data[index + i].icon,
-      description:currLang == 'en' ? data[index + i].descriptionEN : data[index + i].descriptionCN,
+      description: currLang == 'en' ? data[index + i].descriptionEN : data[index + i].descriptionCN,
       name: data[index + i].name,
       stars: data[index + i].stars,
       tags: data[index + i].tags,
@@ -59,7 +59,7 @@ $('.load-more').on('click', function () {
 
 // TODO-END
 // 用户点击切换语言的回调
-$(".lang").click(() => {
+$(".lang").on("click", () => {
   // 切换页面文字的中英文
   if (currLang === "en") {
     $(".lang").text("English");
@@ -77,10 +77,10 @@ $(".lang").click(() => {
       }
     });
   // TODO: 请在此补充代码实现项目描述的语言切换
-  let lis = document.querySelector('ul').children
-  for (let i = 0; i < lis.length; i++) {
-    lis[i].querySelector('p').innerHTML = currLang == 'en' ? data[i].descriptionEN : data[i].descriptionCN
-  }
+  $("ul").children().find("p").each((index, elem) => {
+    $(elem).text(currLang == 'en' ? data[index].descriptionEN : data[index].descriptionCN);
+  });
+
 });
 
 // 生成列表DOM元素的函数，将该元素的返回值append至列表中即可生成一行项目数据

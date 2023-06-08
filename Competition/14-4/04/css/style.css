@@ -174,11 +174,7 @@ label.menu-btn {
 }
 
 /* TODO：待补充代码 */
-@media (max-width: 800px) {
-  .collapse {
-    display: none;
-  }
-
+@media screen and (width <= 800px) {
   label.menu-btn {
     color: #959595;
     /* cursor: pointer; */
@@ -195,14 +191,15 @@ label.menu-btn {
     display: block;
   }
 
-  .menu li {
-    display: block;
-  }
-
   .collapse {
+    display: none;
     position: absolute;
     background-color: #252525;
     width: 100%;
+  }
+
+  .collapse li {
+    display: block;
   }
 
   .dropdown ul {

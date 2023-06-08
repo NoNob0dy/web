@@ -65,8 +65,8 @@ console.log(tree);
 #### Reg Expression
 
 ```js
-const reg = new RegExp(//);
-var string = "I'm going to be tested";
+const reg = new RegExp("^I", "i");
+var string = "i'm going to be tested";
 if (reg.test(string)) { /*...*/ } 
 else { /*...*/ }
 ```
