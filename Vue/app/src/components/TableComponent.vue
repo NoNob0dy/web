@@ -1,5 +1,5 @@
 <template>
-   <el-table :data="tableData.filter(searchFilter)">
+   <el-table :data="tableData.filter(searchFilter)" :row-class-name="rowClassName" ref="table">
       <el-table-column prop="id" label="Id" />
       <el-table-column prop="content" label="Content" />
       <el-table-column>
@@ -30,9 +30,7 @@ export default {
    },
    created() {
       axios.get('./data.json').then(res => {
-         for (let i = 0; i < res.data.length; i++) {
-            this.tableData.push(res.data[i]);
-         }
+         this.tableData = res["data"];
       })
    },
    methods: {
@@ -52,8 +50,15 @@ export default {
       handleDelete(index, row) {
          console.log(index, row);
       },
+      rowClassName({row, rowIndex}) {
+         return "table";
+      }
    },
 }
 </script>
   
-<style></style>
+<style>
+   .el-table .table {
+      background: antiquewhite;
+   }
+</style>

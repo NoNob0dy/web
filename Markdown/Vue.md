@@ -1,5 +1,3 @@
-
-
 #### Vue
 
 ```html
@@ -44,9 +42,7 @@
         },
         created() {
             axios('./data.json').then(res => {
-                for (item in res.data) {
-                    this.list.push(res.data[item]);
-                }
+                this.list = res.data;
             });
         },
         components: {

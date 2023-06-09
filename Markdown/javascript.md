@@ -43,29 +43,26 @@ const list = [
   { id: 7, name: "node 2.1.1", parentId: 6 },
 ];
 
-function buildTree(list, parentId) {  
-    const tree = [];  
-    for (let i = 0; i < list.length; i++) {    
-        if (list[i].parentId === parentId) {      
-            const node = {        
-                id: list[i].id,        
-                name: list[i].name,        
-                children: buildTree(list, list[i].id)     
-            };      
-            tree.push(node);    
-        }  
-    }  
-    return tree; 
-} 
+let listMap = list.reduce((map, node, index) => {
+    map[node.id] = index;
+    return map;
+}, {})
 
-const tree = buildTree(list, null); 
-console.log(tree);
+let root = [];
+list.forEach((node, index) => {
+    if (node.parentId === null) {
+        root.push(node);
+    } else {
+        let parent = list[listMap[node.parentId]];
+        parent.children = [...(parent.children || []), node]
+    }
+})
 ```
 
 #### Reg Expression
 
 ```js
-const reg = new RegExp("^I", "i");
+const reg = new RegExp("^I?", "i");
 var string = "i'm going to be tested";
 if (reg.test(string)) { /*...*/ } 
 else { /*...*/ }

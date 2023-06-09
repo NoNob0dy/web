@@ -68,11 +68,11 @@ export default EChartsOption
         series: [{
             type: 'bar',
             data: [23, 24, 18, 25, 27]
-            stack: 'x'
+            stack: 'Total'
           },{
             type: 'bar',
             data: [16, 14, 9, 13, 14]
-            stack: 'x'
+            stack: 'Total'
           },
         ]
   }

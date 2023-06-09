@@ -41,7 +41,7 @@ const app = new Vue({
   </script>
   
   <style>
-      /*I'm not sure why the form like "el-mian {}" couldn't
+      /*I'm not sure why the form like "el-main {}" couldn't
       be rendered properly, while select the elements by
       using 'id' or 'class' could achieve that*/
       #app {
@@ -103,26 +103,26 @@ const app = new Vue({
               </el-form-item>
               <el-form-item>
                   <el-select v-model="select">
-                      <el-option label="1" value="dennis">
-                          dennis
-                      </el-option>
-                      <el-option label="2" value="den21s">
-                          den21s
-                      </el-option>
+                     <el-option value="dennis">
+                        dennis
+                     </el-option>
+                     <el-option value="den21s">
+                        den21s
+                     </el-option>
                   </el-select>
                   <el-radio-group v-model="radio">
-                      <el-radio label="1" value="dennis">
-                          dennis</el-radio>
-                      <el-radio label="2" value="den21s">
-                          den21s</el-radio>
+                     <el-radio label="dennis">
+                        dennis</el-radio>
+                     <el-radio label="den21s">
+                        den21s</el-radio>
                   </el-radio-group>
                   <el-checkbox-group v-model="checkbox">
-                      <el-checkbox label="1" value="dennis">
-                          dennis
-                      </el-checkbox>
-                      <el-checkbox label="2" value="den21s">
-                          den21s
-                      </el-checkbox>
+                     <el-checkbox label="dennis">
+                        dennis
+                     </el-checkbox>
+                     <el-checkbox label="den21s">
+                        den21s
+                     </el-checkbox>
                   </el-checkbox-group>
               </el-form-item>
               <el-form-item>
@@ -162,7 +162,9 @@ const app = new Vue({
 
   ```vue
   <template>
-      <el-table :data="tableData.filter(searchFilter)">
+          <el-table :data="tableData.filter(searchFilter)" 
+                    :row-class-name="rowClassName" 
+                    ref="table">
           <el-table-column prop="id" label="Id" />
           <el-table-column prop="content" label="Content" />
           <el-table-column>
@@ -218,6 +220,10 @@ const app = new Vue({
               handleDelete(index, row) {
                   console.log(index, row);
               },
+              rowClassName({row, rowIndex}) {
+                  console.log(this.$refs.table);
+                  return "table";
+              }
           },
       }
   </script>
