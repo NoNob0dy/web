@@ -7,7 +7,7 @@ app.use(express.urlencoded({ extended: false }))
 
 
 //添加用户
-app.post('/add', function(req, res) {
+app.get('/add', function(req, res) {
     fs.readFile(path.resolve(__dirname,'./users.json'), 'utf8', function(err, data) {
         data = JSON.parse(data);
         data["userlist"].push({

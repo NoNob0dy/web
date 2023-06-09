@@ -79,7 +79,11 @@
         // TODO：补全代码实现需求
         goods.num--;
         if (goods.num == 0) {
-          this.cartList.pop(goods);
+          for (item in this.cartList) {
+            if (this.cartList[item].id == goods.id) {
+              this.cartList.splice(item, 1);
+            }
+          }
           for (item in this.goodsList) {
             if (this.goodsList[item].id == goods.id) {
               delete this.goodsList[item].num;
