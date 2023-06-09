@@ -13,7 +13,7 @@ async function ajax({ url, method = "get", data }) {
   if (method == 'get') {
     if (!localStorage.getItem('data')) {
       axios.get('./js/data.json').then(res => {
-        result = JSON.parse(JSON.stringify(res.data))
+        result = JSON.parse(JSON.stringify(res.data));
       })
     } else {
       result = localStorage.getItem('data')

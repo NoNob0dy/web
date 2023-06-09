@@ -21,10 +21,27 @@ let menuList = [
 
 const getMenuListAndAuth = (menuList) => {
   // TODO：待补充代码
+  let menuListMapping = menuList.reduce((mapping, node, index) => {
+    mapping[node.id] = index;
+    return mapping;
+  }, {});
+
+  let menus = [];
+  menuList.forEach(node => {
+    if (node.parentId == -1) {
+      menus.push(node);
+    } else {
+      let parent = menuList[menuListMapping[node.parentId]];
+      parent.children = [...(parent.children || []), node];
+    }
+  });
+
+  let auths = menuList.map(node => node.auth);
+  
   return { menus, auths }; // menus 转化后的树形结构数据，auths 转化后的权限列表数组
 };
 
 // 请勿删除和修改以下代码
 try {
   module.exports = { getMenuListAndAuth };
-} catch (e) {}
+} catch (e) { }

@@ -19,15 +19,17 @@ let generateData = (data) => {
 
 function parseJson(json) {
    let replace = json;
-   let bool = /\"\{\{bool\(\)\}\}\"/;
-   let integer = /\"\{\{integer\((\d+(\,\d+)?)\)\}\}\"/;
-
-   if (replace.match(bool) !== null) {
-      replace = replace.replace(bool, getRandom("0, 1") == 1 ? true : false);
+   let bool = replace.match(/\"\{\{bool\(\)\}\}\"/);
+   let integer = replace.match(/\"\{\{integer\((\d+(\,\d+)?)\)\}\}\"/);
+   if (bool !== null) {
+      bool.forEach(element => {
+         replace = replace.replace(element, getRandom("0, 1") == 1 ? true : false);
+      });  
    }
-   let tmp = replace.match(integer)
-   if (tmp !== null) {
-      replace = replace.replace(integer, getRandom(tmp[0]));
+   if (integer !== null) {
+      integer.forEach(element => {
+         replace = replace.replace(element, getRandom(element));
+      });  
    }
    return JSON.parse(replace);
 }
